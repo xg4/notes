@@ -1,0 +1,23 @@
+language: node_js
+
+node_js:
+  - stable
+
+before_deploy:
+  - npm run build
+
+deploy:
+  - provider: pages
+    local_dir: ./dist
+    skip_cleanup: true
+    github_token: $GITHUB_TOKEN
+    keep_history: true
+    on:
+      branch: master
+
+branches:
+  only:
+    - master
+
+cache:
+  yarn: true
