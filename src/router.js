@@ -17,6 +17,17 @@ export default new Router({
       // this generates a separate chunk (about.[hash].js) for this route
       // which is lazy-loaded when the route is visited.
       component: () => import(/* webpackChunkName: "new" */ './views/new')
+    },
+    {
+      path: '/star',
+      name: 'star',
+      component: () => import(/* webpackChunkName: "star" */ './views/star')
+    },
+    {
+      path: '/profile',
+      name: 'profile',
+      component: () =>
+        import(/* webpackChunkName: "profile" */ './views/profile')
     }
   ]
 })

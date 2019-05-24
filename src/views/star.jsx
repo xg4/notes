@@ -1,5 +1,5 @@
 export default {
   render() {
-    return <div>home</div>
+    return <div>1</div>
   }
 }

@@ -6,7 +6,7 @@ module.exports = {
       {
         libraryName: 'vant',
         libraryDirectory: 'es',
-        style: false
+        style: true
       }
     ]
   ]
