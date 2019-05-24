@@ -1,15 +1,37 @@
 {
   "name": "notes",
-  "version": "0.1.0",
+  "version": "0.0.0",
   "private": true,
+  "description": "",
+  "keywords": [],
+  "homepage": "https://github.com/xg4/notes#readme",
+  "bugs": {
+    "url": "https://github.com/xg4/notes/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/xg4/notes.git"
+  },
+  "license": "MIT",
+  "author": "xg4 <xingor4@gmail.com>",
   "scripts": {
-    "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
-    "lint": "vue-cli-service lint"
+    "lint": "vue-cli-service lint",
+    "start": "vue-cli-service serve",
+    "test": "npm run lint"
+  },
+  "lint-staged": {
+    "*.{js,vue}": [
+      "vue-cli-service lint",
+      "git add"
+    ]
   },
   "dependencies": {
+    "animate.css": "^3.7.0",
     "core-js": "^2.6.5",
+    "normalize.css": "^8.0.1",
     "register-service-worker": "^1.6.2",
+    "vant": "^1.6.19",
     "vue": "^2.6.10",
     "vue-router": "^3.0.3",
     "vuex": "^3.0.1"
@@ -26,15 +48,12 @@
     "less": "^3.0.4",
     "less-loader": "^4.1.0",
     "lint-staged": "^8.1.5",
+    "postcss-flexbugs-fixes": "^4.1.0",
+    "postcss-preset-env": "^6.6.0",
+    "postcss-px-to-viewport": "^1.1.0",
     "vue-template-compiler": "^2.5.21"
   },
   "gitHooks": {
     "pre-commit": "lint-staged"
-  },
-  "lint-staged": {
-    "*.{js,vue}": [
-      "vue-cli-service lint",
-      "git add"
-    ]
   }
 }
