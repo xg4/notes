@@ -3,13 +3,12 @@
   border-radius: 8px;
   border: 1px solid #ebeef5;
   background-color: #fff;
-  // overflow: hidden;
   box-shadow: 0 0 8px 0 rgba(232, 237, 250, 0.6),
     0 2px 4px 0 rgba(232, 237, 250, 0.5);
   color: var(--fontColor);
-  // position: relative;
   display: flex;
   padding: 0 5px;
+  overflow: hidden;
 
   &__action {
     width: 10%;
@@ -20,13 +19,21 @@
 
     .x-icon-tag {
       position: absolute;
-      top: 0;
+      top: -1.5px;
       left: 50%;
       transform: translate3d(-50%, 0, 0);
     }
 
-    .van-icon {
+    a {
       font-size: 25px;
+
+      .van-icon-circle {
+        color: var(--fontColor);
+      }
+
+      .van-icon-certificate {
+        color: var(--mainColor);
+      }
     }
   }
 
@@ -40,7 +47,6 @@
     font-size: 16px;
     padding: 10px 5px;
     border-bottom: 1px solid #ebeef5;
-
     min-height: 39px;
   }
 
@@ -65,62 +71,13 @@
     align-items: center;
 
     time {
-      font-size: 12px;
+      font-size: 10px;
       color: gray(60);
-      font-weight: bold;
     }
 
     a {
       font-size: 20px;
       color: rgb(255, 210, 30);
     }
-  }
-
-  &-header {
-    // margin-left: 32px;
-    // padding: 10px 5px;
-
-    box-sizing: border-box;
-    font-weight: bolder;
-    display: flex;
-    justify-content: space-between;
-  }
-
-  &-title {
-    width: 80%;
-    height: 22px;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-  }
-
-  &-date {
-    width: 20%;
-    text-align: center;
-    font-size: 8px;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-  }
-
-  &-body {
-    display: flex;
-    justify-content: space-between;
-    margin-left: 32px;
-    padding: 10px 5px;
-    height: 22px;
-  }
-
-  &-content {
-    width: 80%;
-    color: rgb(171, 171, 171);
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-  }
-
-  &-collect {
-    width: 20%;
-    text-align: center;
   }
 }

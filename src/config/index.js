@@ -1,3 +1,5 @@
+export const title = '备忘录'
+
 // 默认的tags
 export const TAGS = [
   {

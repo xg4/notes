@@ -6,7 +6,9 @@ import mutations from './mutations'
 
 Vue.use(Vuex)
 
-const state = {}
+const state = {
+  notes: {}
+}
 
 export default new Vuex.Store({
   state,
