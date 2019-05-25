@@ -1,0 +1,28 @@
+@import './reset.less';
+@import './mixins/index.less';
+
+:root {
+  --bgColor: #fff;
+  --fontColor: #303133;
+  --mainColor: #1989fa;
+}
+
+.clearfix {
+  .clearfix;
+}
+
+.ellipsis {
+  .ellipsis;
+
+  &-2 {
+    .multi-ellipsis(2);
+  }
+
+  &-3 {
+    .multi-ellipsis(3);
+  }
+}
+
+.x-icon {
+  font-size: 16px;
+}
