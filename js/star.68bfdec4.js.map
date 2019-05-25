@@ -1,0 +1,1 @@
+{"version":3,"sources":["webpack:///./src/views/star.jsx"],"names":["__webpack_require__","r","__webpack_exports__","render","h","arguments"],"mappings":"wGAAAA,EAAAC,EAAAC,GAAeA,EAAA,YACbC,OADa,WACJ,IAAAC,EAAAC,UAAA,GACP,OAAAD,EAAA","file":"js/star.68bfdec4.js","sourcesContent":["export default {\n  render() {\n    return <div>1</div>\n  }\n}\n"],"sourceRoot":""}

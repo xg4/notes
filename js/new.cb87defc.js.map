@@ -1,0 +1,1 @@
+{"version":3,"sources":["webpack:///./src/views/new.jsx"],"names":["__webpack_require__","r","__webpack_exports__","render","h","arguments"],"mappings":"qGAAAA,EAAAC,EAAAC,GAAeA,EAAA,YACbC,OADa,WACJ,IAAAC,EAAAC,UAAA,GACP,OAAAD,EAAA","file":"js/new.cb87defc.js","sourcesContent":["export default {\n  render() {\n    return <div>new</div>\n  }\n}\n"],"sourceRoot":""}
