@@ -46,16 +46,13 @@ export default {
           fixed
           onClick-left={this.handleBack}
         />
-        <transition
-          enter-active-class={classNames('animated', this.transitionName)}
-        >
-          <router-view
-            class={classNames(
-              { [styles.top]: showNavbar },
-              { [styles.bottom]: showTabbar }
-            )}
-          />
-        </transition>
+
+        <router-view
+          class={classNames(
+            { [styles.top]: showNavbar },
+            { [styles.bottom]: showTabbar }
+          )}
+        />
 
         <van-tabbar vShow={showTabbar} route>
           <van-tabbar-item replace to="/" icon="label-o">
