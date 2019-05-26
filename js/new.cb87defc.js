@@ -1,2 +1,0 @@
-(window["webpackJsonp"]=window["webpackJsonp"]||[]).push([["new"],{baf5:function(n,e,w){"use strict";w.r(e),e["default"]={render:function(){var n=arguments[0];return n("div",["new"])}}}}]);
-//# sourceMappingURL=new.cb87defc.js.map

@@ -1,1 +1,0 @@
-{"version":3,"sources":["webpack:///./src/views/note/_id.jsx"],"names":["__webpack_require__","r","__webpack_exports__","render","h","arguments"],"mappings":"0GAAAA,EAAAC,EAAAC,GAAeA,EAAA,YACbC,OADa,WACJ,IAAAC,EAAAC,UAAA,GACP,OAAAD,EAAA","file":"js/detail.0fcc85a3.js","sourcesContent":["export default {\n  render() {\n    return <div>id</div>\n  }\n}\n"],"sourceRoot":""}

@@ -1,2 +1,0 @@
-(window["webpackJsonp"]=window["webpackJsonp"]||[]).push([["star"],{"1f86":function(n,r,e){"use strict";e.r(r),r["default"]={render:function(){var n=arguments[0];return n("div",["1"])}}}}]);
-//# sourceMappingURL=star.68bfdec4.js.map
