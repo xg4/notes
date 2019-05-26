@@ -42,7 +42,6 @@ export default {
           vShow={showNavbar}
           title={this.title}
           left-text="返回"
-          right-text="按钮"
           left-arrow
           fixed
           onClick-left={this.handleBack}

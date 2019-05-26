@@ -1,5 +1,9 @@
-import './index.less'
+import classNames from 'classnames'
+import styles from './index.module.less'
 import { friendlyDate } from '../../util'
+import Collect from '../collect'
+import Complete from '../complete'
+import Tag from '../tag'
 
 export default ({
   parent: { $store },
@@ -17,34 +21,20 @@ export default ({
   }
   return (
     <transition leave-active-class="animated bounceOutLeft">
-      <router-link to={`/note/${id}`} class="x-item">
-        <div class="x-item__action">
-          <i class="x-icon x-icon-tag" style={{ color: '#1989fa' }} />
-          <a href="javascript:;" onClick={handleComplete}>
-            <transition
-              mode="out-in"
-              enter-active-class="animated bounceInLeft"
-            >
-              <div key={is_complete}>
-                <van-icon name={is_complete ? 'certificate' : 'circle'} />
-              </div>
-            </transition>
-          </a>
+      <router-link to={`/note/${id}`} class={styles.wrap}>
+        <div class={styles.action}>
+          <Tag class={styles.tag} />
+          <Complete active={is_complete} onClick={handleComplete} />
         </div>
-        <div class="x-item__main">
-          <div class="x-item__title ellipsis">{title}</div>
-          <div class="x-item__content ">
+        <div class={styles.main}>
+          <div class={classNames('ellipsis', styles.title)}>{title}</div>
+          <div class={classNames(styles.content)}>
             <p class="ellipsis-2">{content}</p>
           </div>
         </div>
-        <div class="x-item__control">
-          <a href="javascript:;" onClick={handleCollect}>
-            <transition mode="out-in" enter-active-class="animated zoomIn">
-              <div key={is_collect}>
-                <van-icon name={is_collect ? 'star' : 'star-o'} />
-              </div>
-            </transition>
-          </a>
+        <div class={styles.control}>
+          <Collect active={is_collect} onClick={handleCollect} />
+
           <time>{friendlyDate(create_at)}</time>
         </div>
       </router-link>

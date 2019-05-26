@@ -1,5 +1,8 @@
 import styles from './_id.module.less'
 import { formatDate } from '../../util'
+import Collect from '../../components/collect'
+import Complete from '../../components/complete'
+import Tag from '../../components/tag'
 
 export default {
   computed: {
@@ -39,28 +42,17 @@ export default {
         <h1 class={styles.title}>{title}</h1>
         <ul class={styles.action}>
           <li>
-            <a href="javascript:;" onClick={this.handleComplete}>
-              <transition
-                mode="out-in"
-                enter-active-class="animated bounceInLeft"
-              >
-                <div key={is_complete}>
-                  <van-icon name={is_complete ? 'certificate' : 'circle'} />
-                </div>
-              </transition>
-            </a>
+            <Complete active={is_complete} onClick={this.handleComplete}>
+              {is_complete ? '已完成' : '未完成'}
+            </Complete>
           </li>
           <li>
-            <i class="x-icon x-icon-tag" />
+            <Tag />
           </li>
           <li>
-            <a href="javascript:;" onClick={this.handleCollect}>
-              <transition mode="out-in" enter-active-class="animated zoomIn">
-                <div key={is_collect}>
-                  <van-icon name={is_collect ? 'star' : 'star-o'} />
-                </div>
-              </transition>
-            </a>
+            <Collect active={is_collect} onClick={this.handleCollect}>
+              {is_collect ? '已收藏' : '未收藏'}
+            </Collect>
           </li>
         </ul>
 
