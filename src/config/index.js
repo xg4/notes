@@ -1,5 +1,7 @@
 export const title = '备忘录'
 
+export const STORE_KEY = 'NOTE_STORE'
+
 // 默认的tags
 export const TAGS = [
   {

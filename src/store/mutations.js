@@ -6,7 +6,9 @@ export default {
   },
   [types.PUT_NOTE](state, note) {
     const id = note.id
-    const oldNote = state.notes[id]
-    state.notes[id] = { ...oldNote, ...note }
+    state.notes[id] = note
+  },
+  [types.POST_NOTE](state, note) {
+    state.notes = { ...state.notes, [note.id]: note }
   }
 }

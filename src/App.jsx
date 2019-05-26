@@ -1,6 +1,6 @@
 import classNames from 'classnames'
 import styles from './App.module.less'
-import config from './config'
+import * as config from './config'
 
 export default {
   beforeMount() {
@@ -42,21 +42,17 @@ export default {
           vShow={showNavbar}
           title={this.title}
           left-text="返回"
-          right-text="按钮"
           left-arrow
           fixed
           onClick-left={this.handleBack}
         />
-        <transition
-          enter-active-class={classNames('animated', this.transitionName)}
-        >
-          <router-view
-            class={classNames(
-              { [styles.top]: showNavbar },
-              { [styles.bottom]: showTabbar }
-            )}
-          />
-        </transition>
+
+        <router-view
+          class={classNames(
+            { [styles.top]: showNavbar },
+            { [styles.bottom]: showTabbar }
+          )}
+        />
 
         <van-tabbar vShow={showTabbar} route>
           <van-tabbar-item replace to="/" icon="label-o">

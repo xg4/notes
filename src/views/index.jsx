@@ -1,4 +1,5 @@
-import Item from '../components/item'
+import Card from '../components/card'
+import Empty from '../components/empty'
 
 export default {
   computed: {
@@ -9,9 +10,11 @@ export default {
   render() {
     return (
       <div>
-        {this.notes.map(item => (
-          <Item {...{ attrs: item }} />
-        ))}
+        {this.notes.length ? (
+          this.notes.map(item => <Card {...{ attrs: item }} />)
+        ) : (
+          <Empty />
+        )}
       </div>
     )
   }

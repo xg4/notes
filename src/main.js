@@ -9,10 +9,32 @@ import 'animate.css'
 // import 'vant/lib/index.css'
 import './assets/css/index.less'
 
-import { Button, NavBar, Tabbar, TabbarItem, Tab, Tabs, Icon } from 'vant'
-;[Button, NavBar, Tabbar, TabbarItem, Tab, Tabs, Icon].forEach(component =>
-  Vue.use(component)
-)
+import {
+  Toast,
+  SwitchCell,
+  CellGroup,
+  Field,
+  Button,
+  NavBar,
+  Tabbar,
+  TabbarItem,
+  Tab,
+  Tabs,
+  Icon
+} from 'vant'
+;[
+  Toast,
+  SwitchCell,
+  CellGroup,
+  Field,
+  Button,
+  NavBar,
+  Tabbar,
+  TabbarItem,
+  Tab,
+  Tabs,
+  Icon
+].forEach(component => Vue.use(component))
 
 Vue.config.productionTip = false
 

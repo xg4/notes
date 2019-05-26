@@ -1,5 +1,21 @@
+import Card from '../components/card'
+import Empty from '../components/empty'
+
 export default {
+  computed: {
+    notes() {
+      return this.$store.getters.notesByCollection
+    }
+  },
   render() {
-    return <div>1</div>
+    return (
+      <div>
+        {this.notes.length ? (
+          this.notes.map(item => <Card {...{ attrs: item }} />)
+        ) : (
+          <Empty />
+        )}
+      </div>
+    )
   }
 }
