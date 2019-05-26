@@ -7,10 +7,9 @@ export default {
    * @param {*} param0
    */
   [types.INIT_NOTES]({ commit }) {
-    const notes = Store.get()
     commit(
       types.INIT_NOTES,
-      notes.reduce((store, nextItem) => {
+      Store.get().reduce((store, nextItem) => {
         store[nextItem.id] = nextItem
         return store
       }, {})
@@ -22,8 +21,7 @@ export default {
    * @param {*} note
    */
   [types.PUT_NOTE]({ commit }, note) {
-    // TODO: 修改 note
-    commit(types.PUT_NOTE, note)
+    commit(types.PUT_NOTE, Store.put(note))
   },
   /**
    * @description 新建 note
@@ -31,8 +29,6 @@ export default {
    * @param {*} note
    */
   [types.POST_NOTE]({ commit }, note) {
-    // TODO: 存 note
-    Store.post(note)
-    commit(types.POST_NOTE, note)
+    commit(types.POST_NOTE, Store.post(note))
   }
 }
