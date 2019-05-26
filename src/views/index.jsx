@@ -1,4 +1,4 @@
-import Item from '../components/item'
+import Card from '../components/card'
 
 export default {
   computed: {
@@ -10,7 +10,7 @@ export default {
     return (
       <div>
         {this.notes.map(item => (
-          <Item {...{ attrs: item }} />
+          <Card {...{ attrs: item }} />
         ))}
       </div>
     )
