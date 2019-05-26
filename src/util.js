@@ -35,6 +35,12 @@ export const generateNote = ({ title, content, is_collect, is_complete }) => ({
   update_at: Date.now()
 })
 
+export const transformOriginData = notes =>
+  notes.reduce((store, note) => {
+    store[note.id] = note
+    return store
+  }, {})
+
 export const Store = {
   get() {
     const notes = JSON.parse(localStorage.getItem(config.STORE_KEY) || null)
@@ -60,5 +66,14 @@ export const Store = {
     notes.splice(index, 1, note)
     this.save(notes)
     return note
+  },
+  delete() {
+    this.save([])
+    return []
+  },
+  deleteCompleted() {
+    const notes = this.get().filter(note => !note.is_complete)
+    this.save(notes)
+    return notes
   }
 }

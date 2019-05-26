@@ -4,7 +4,7 @@ export default {
   render() {
     return (
       <div class="profile">
-        <div>1</div>
+        <div />
         <small class="profile-copyright">
           <a href="https://github.com/xg4/notes" target="_blank">
             <i class="x-icon x-icon-github-fill" />

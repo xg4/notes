@@ -12,7 +12,8 @@ const router = new Router({
       meta: {
         title: '备忘录',
         showNavbar: true,
-        showTabbar: true
+        showTabbar: true,
+        actionSheet: 'notes'
       },
       component: () => import(/* webpackChunkName: "home" */ './views/index')
     },

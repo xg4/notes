@@ -4,14 +4,14 @@ import Empty from '../components/empty'
 export default {
   computed: {
     notes() {
-      return this.$store.getters.notesByCollection
+      return this.$store.getters.collectedNotes
     }
   },
   render() {
     return (
       <div>
         {this.notes.length ? (
-          this.notes.map(item => <Card {...{ attrs: item }} />)
+          this.notes.map(item => <Card {...{ attrs: item }} key={item.id} />)
         ) : (
           <Empty />
         )}

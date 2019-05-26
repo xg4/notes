@@ -4,11 +4,12 @@ import * as config from './config'
 
 export default {
   beforeMount() {
-    this.$store.dispatch('INIT_NOTES')
+    this.$store.dispatch('APP_INIT')
   },
   data() {
     return {
-      transitionName: 'slideInLeft'
+      transitionName: 'slideInLeft',
+      visibleSheet: false
     }
   },
   computed: {
@@ -20,6 +21,14 @@ export default {
     },
     showTabbar() {
       return this.$route.meta.showTabbar
+    },
+    hasActionSheet() {
+      return !!this.$route.meta.actionSheet
+    },
+    actionSheet() {
+      return this.hasActionSheet
+        ? config.ACTION_SHEET_MAP[this.$route.meta.actionSheet]
+        : []
     }
   },
   watch: {
@@ -32,6 +41,52 @@ export default {
   methods: {
     handleBack() {
       this.$router.back()
+    },
+    handleActionSheet() {
+      this.visibleSheet = !this.visibleSheet
+    },
+    handleSheetSelect(item) {
+      switch (item.action) {
+        case 'new':
+          this.$router.push('/new')
+          break
+        case 'sort':
+          this.$store.dispatch('PUT_NOTES_SORT')
+          break
+        case 'deleteCompleted':
+          if (!this.$store.getters.completedNotes.length) {
+            this.$toast('没有已完成的备忘录')
+          } else {
+            this.$dialog
+              .confirm({
+                message: '您确定要删除已完成的备忘录吗？\n此操作不可恢复',
+                closeOnClickOverlay: true
+              })
+              .then(() => {
+                this.$store.dispatch('DELETE_COMPLETED_NOTES')
+              })
+              .catch(() => {})
+          }
+
+          break
+        case 'deleteAll':
+          if (!this.$store.getters.notes.length) {
+            this.$toast('当前备忘录为空，您可以先新建几个')
+          } else {
+            this.$dialog
+              .confirm({
+                message: '您确定要删除全部备忘录吗？\n此操作不可恢复',
+                closeOnClickOverlay: true
+              })
+              .then(() => {
+                this.$store.dispatch('DELETE_NOTES')
+              })
+              .catch(() => {})
+          }
+          break
+        default:
+          break
+      }
     }
   },
   render() {
@@ -45,7 +100,19 @@ export default {
           left-arrow
           fixed
           onClick-left={this.handleBack}
-        />
+          onClick-right={this.handleActionSheet}
+        >
+          {this.hasActionSheet && <van-icon name="ellipsis" slot="right" />}
+        </van-nav-bar>
+        {this.hasActionSheet && (
+          <van-action-sheet
+            vModel={this.visibleSheet}
+            actions={this.actionSheet}
+            onSelect={this.handleSheetSelect}
+            cancel-text="取消"
+            close-on-click-action
+          />
+        )}
 
         <router-view
           class={classNames(

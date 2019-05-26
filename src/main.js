@@ -10,6 +10,8 @@ import 'animate.css'
 import './assets/css/index.less'
 
 import {
+  Dialog,
+  ActionSheet,
   Toast,
   SwitchCell,
   CellGroup,
@@ -23,6 +25,8 @@ import {
   Icon
 } from 'vant'
 ;[
+  Dialog,
+  ActionSheet,
   Toast,
   SwitchCell,
   CellGroup,

@@ -7,7 +7,10 @@ import mutations from './mutations'
 Vue.use(Vuex)
 
 const state = {
-  notes: {}
+  notes: {},
+  user: {
+    sort: 0
+  }
 }
 
 export default new Vuex.Store({

@@ -31,7 +31,6 @@ export default {
           <van-field
             vModel={this.title}
             label="标题"
-            required
             placeholder="请输入标题"
           />
           <van-field
