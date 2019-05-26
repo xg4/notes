@@ -2,8 +2,16 @@
   "name": "notes",
   "version": "0.0.0",
   "private": true,
-  "description": "",
-  "keywords": [],
+  "description": "A memo application developed with vue",
+  "keywords": [
+    "memo",
+    "notes",
+    "pwa",
+    "todolist",
+    "vue-router",
+    "vue.js",
+    "vuex"
+  ],
   "homepage": "https://github.com/xg4/notes#readme",
   "bugs": {
     "url": "https://github.com/xg4/notes/issues"
