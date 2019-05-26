@@ -1,8 +1,9 @@
 import './index.less'
+import { friendlyDate } from '../../util'
 
 export default ({
   parent: { $store },
-  props: { id, is_complete, is_collect, title, content }
+  props: { id, create_at, is_complete, is_collect, title, content }
 }) => {
   const handleComplete = ev => {
     // ev.preventDefault()
@@ -44,7 +45,7 @@ export default ({
               </div>
             </transition>
           </a>
-          <time>36分钟前</time>
+          <time>{friendlyDate(create_at)}</time>
         </div>
       </router-link>
     </transition>

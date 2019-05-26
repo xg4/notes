@@ -31,7 +31,6 @@ export default {
   },
   methods: {
     handleBack() {
-      console.log(this.$route)
       this.$router.back()
     }
   },
