@@ -1,4 +1,4 @@
-import './item.less'
+import './index.less'
 
 export default ({
   parent: { $store },
