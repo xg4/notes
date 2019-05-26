@@ -1,6 +1,6 @@
 import classNames from 'classnames'
 import styles from './App.module.less'
-import config from './config'
+import * as config from './config'
 
 export default {
   beforeMount() {
@@ -31,6 +31,7 @@ export default {
   },
   methods: {
     handleBack() {
+      console.log(this.$route)
       this.$router.back()
     }
   },

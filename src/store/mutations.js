@@ -8,5 +8,8 @@ export default {
     const id = note.id
     const oldNote = state.notes[id]
     state.notes[id] = { ...oldNote, ...note }
+  },
+  [types.POST_NOTE](state, note) {
+    state.notes = { ...state.notes, [note.id]: note }
   }
 }

@@ -1,17 +1,5 @@
+import { Store } from '../util'
 import * as types from './types'
-
-const notes = [
-  {
-    id: '1',
-    title: '123',
-    content: '233233',
-    tag: '',
-    is_complete: false,
-    is_collect: false,
-    create_at: '',
-    update_at: ''
-  }
-]
 
 export default {
   /**
@@ -19,6 +7,7 @@ export default {
    * @param {*} param0
    */
   [types.INIT_NOTES]({ commit }) {
+    const notes = Store.get()
     commit(
       types.INIT_NOTES,
       notes.reduce((store, nextItem) => {
@@ -33,6 +22,17 @@ export default {
    * @param {*} note
    */
   [types.PUT_NOTE]({ commit }, note) {
+    // TODO: 修改 note
     commit(types.PUT_NOTE, note)
+  },
+  /**
+   * @description 新建 note
+   * @param {*} param0
+   * @param {*} note
+   */
+  [types.POST_NOTE]({ commit }, note) {
+    // TODO: 存 note
+    Store.post(note)
+    commit(types.POST_NOTE, note)
   }
 }
