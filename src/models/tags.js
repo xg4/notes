@@ -2,7 +2,7 @@ import nanoid from 'nanoid'
 import { STORE_TAGS_KEY } from '../config'
 
 export default {
-  init() {
+  normalize() {
     return [
       {
         id: nanoid(),
@@ -41,13 +41,16 @@ export default {
       }
     ]
   },
+  init() {
+    return this.transform(this.get())
+  },
   get() {
     let tags = JSON.parse(localStorage.getItem(STORE_TAGS_KEY) || null)
     if (!tags) {
-      tags = this.init()
+      tags = this.normalize()
       this.save(tags)
     }
-    return this.transform(tags)
+    return tags
   },
   save(tags) {
     return localStorage.setItem(STORE_TAGS_KEY, JSON.stringify(tags))

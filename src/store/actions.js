@@ -1,5 +1,4 @@
-import { Store, Origin } from '../util'
-import { Tag } from '../models'
+import { Tag, Note } from '../models'
 import * as types from './types'
 
 export default {
@@ -7,24 +6,22 @@ export default {
    * @description 初始化 app 数据
    */
   [types.APP_INIT]({ commit }) {
-    commit(types.APP_INIT, {
-      notes: Origin.transform(Store.get()),
-      tags: Tag.get()
-    })
+    commit(types.PUT_NOTES, Note.init())
+    commit(types.PUT_TAGS, Tag.init())
   },
   /**
    * @description update note data by id
    * @param {*} note
    */
   [types.PUT_NOTE]({ commit }, partialNote) {
-    commit(types.PUT_NOTE, Store.put(partialNote))
+    commit(types.PUT_NOTE, Note.put(partialNote))
   },
   /**
    * @description create note
    * @param {*} note
    */
   [types.POST_NOTE]({ commit }, note) {
-    commit(types.POST_NOTE, Store.post(note))
+    commit(types.POST_NOTE, Note.post(note))
   },
   /**
    * @description update notes sort type
@@ -34,21 +31,18 @@ export default {
     commit(types.PUT_NOTES_SORT, +!state.user.sort)
   },
   [types.DELETE_NOTE]({ commit }, id) {
-    commit(types.DELETE_NOTE, Origin.transform(Store.deleteById(id)))
+    commit(types.PUT_NOTES, Note.deleteById(id))
   },
   /**
    * @description delete all notes
    */
   [types.DELETE_NOTES]({ commit }) {
-    commit(types.DELETE_NOTES, Origin.transform(Store.delete()))
+    commit(types.PUT_NOTES, Note.delete())
   },
   /**
    * @description delete completed notes
    */
   [types.DELETE_COMPLETED_NOTES]({ commit }) {
-    commit(
-      types.DELETE_COMPLETED_NOTES,
-      Origin.transform(Store.deleteCompleted())
-    )
+    commit(types.PUT_NOTES, Note.deleteCompleted())
   }
 }

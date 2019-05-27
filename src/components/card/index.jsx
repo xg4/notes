@@ -1,6 +1,6 @@
 import classNames from 'classnames'
 import styles from './index.module.less'
-import { Time } from '../../util'
+import { formatDate } from '../../util'
 import Collect from '../collect'
 import Complete from '../complete'
 import Tag from '../tag'
@@ -61,7 +61,7 @@ export default {
           <div class={styles.control}>
             <Collect active={is_collect} onClick={handleCollect} />
 
-            <time>{Time.friendly(create_at)}</time>
+            <time>{formatDate.friendly(create_at)}</time>
           </div>
         </router-link>
       </transition>

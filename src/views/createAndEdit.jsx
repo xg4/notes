@@ -1,4 +1,4 @@
-import { Origin } from '../util'
+import { Note } from '../models'
 import styles from './createAndEdit.module.less'
 import Tag from '../components/tag'
 
@@ -55,7 +55,7 @@ export default {
         this.$store.dispatch('PUT_NOTE', note)
         this.$router.back()
       } else {
-        note = Origin.generate(this)
+        note = Note.new(this)
         this.$store.dispatch('POST_NOTE', note)
         this.$router.replace(`/note/${note.id}`)
       }

@@ -1,18 +1,14 @@
 import styles from './_id.module.less'
-import { Time } from '../../util'
+import { formatDate } from '../../util'
 import Collect from '../../components/collect'
 import Complete from '../../components/complete'
 import Tag from '../../components/tag'
 
 export default {
+  // TODO: Verify that there is a note in BeforeRouterEnter
   computed: {
     note() {
-      const note = this.$store.state.notes[this.$route.params.id]
-      if (!note) {
-        this.$router.replace('/404')
-        return {}
-      }
-      return note
+      return this.$store.state.notes[this.$route.params.id]
     }
   },
   methods: {
@@ -67,8 +63,8 @@ export default {
         <footer class={styles.footer}>
           <time>
             {create_at === update_at
-              ? `创建于：${Time.format(create_at)}`
-              : `更新于：${Time.format(update_at)}`}
+              ? `创建于：${formatDate(create_at)}`
+              : `更新于：${formatDate(update_at)}`}
           </time>
         </footer>
       </div>
