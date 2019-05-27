@@ -1,29 +1,18 @@
-# notes
+# Notes
 
-## Project setup
-```
-yarn install
-```
+> A memo application developed with vue
 
-### Compiles and hot-reloads for development
-```
-yarn run serve
-```
+[![Build Status](https://www.travis-ci.com/xg4/notes.svg?branch=master)](https://www.travis-ci.com/xg4/notes)
+[![GitHub](https://img.shields.io/github/license/xg4/notes.svg)](https://github.com/xg4/notes/blob/master/LICENSE)
 
-### Compiles and minifies for production
-```
-yarn run build
-```
+## Contributing
 
-### Run your tests
-```
-yarn run test
-```
+Any
 
-### Lints and fixes files
-```
-yarn run lint
-```
+- Fork it
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+- submit pull request
+
+## LICENSE
+
+MIT
