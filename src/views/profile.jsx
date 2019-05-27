@@ -1,11 +1,10 @@
-import './profile.less'
+import styles from './profile.module.less'
 
 export default {
   render() {
     return (
-      <div class="profile">
-        <div />
-        <small class="profile-copyright">
+      <div>
+        <small class={styles.copyright}>
           <a href="https://github.com/xg4/notes" target="_blank">
             <i class="x-icon x-icon-github-fill" />
           </a>
