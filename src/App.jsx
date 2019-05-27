@@ -82,6 +82,21 @@ export default {
               .catch(() => {})
           }
           break
+        case 'edit':
+          this.$router.push(`/edit/${this.$route.params.id}`)
+          break
+        case 'delete':
+          this.$dialog
+            .confirm({
+              message: '您确定要删除此备忘录吗？\n此操作不可恢复',
+              closeOnClickOverlay: true
+            })
+            .then(() => {
+              this.$store.dispatch('DELETE_NOTE', this.$route.params.id)
+              this.$router.replace('/')
+            })
+            .catch(() => {})
+          break
         default:
           break
       }
@@ -122,7 +137,7 @@ export default {
           <van-tabbar-item replace to="/" icon="label-o">
             记录
           </van-tabbar-item>
-          <van-tabbar-item replace to="/new" icon="add-o">
+          <van-tabbar-item to="/new" icon="add-o">
             新建
           </van-tabbar-item>
           <van-tabbar-item replace to="/star" icon="star-o">

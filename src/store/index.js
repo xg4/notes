@@ -9,6 +9,7 @@ Vue.use(Vuex)
 const state = {
   notes: {},
   user: {
+    // 0(default): sort by note.update_at
     sort: 0
   }
 }

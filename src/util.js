@@ -1,6 +1,6 @@
 import nanoid from 'nanoid'
 import dayjs from 'dayjs'
-import * as config from './config'
+import { STORE_NOTES_KEY } from './config'
 
 export const Time = {
   /**
@@ -61,11 +61,11 @@ export const Origin = {
 
 export const Store = {
   get() {
-    const notes = JSON.parse(localStorage.getItem(config.STORE_KEY) || null)
+    const notes = JSON.parse(localStorage.getItem(STORE_NOTES_KEY) || null)
     return notes || []
   },
   save(notes) {
-    return localStorage.setItem(config.STORE_KEY, JSON.stringify(notes))
+    return localStorage.setItem(STORE_NOTES_KEY, JSON.stringify(notes))
   },
   getById(id) {
     return this.get().find(note => note.id === id) || {}
@@ -77,6 +77,9 @@ export const Store = {
     return note
   },
   put(note) {
+    if (!note.id) {
+      return
+    }
     const notes = this.get()
     const oldNote = notes.find(n => n.id === note.id)
     const index = notes.findIndex(n => n.id === note.id)
@@ -88,6 +91,11 @@ export const Store = {
   delete() {
     this.save([])
     return []
+  },
+  deleteById(id) {
+    const notes = this.get().filter(note => note.id !== id)
+    this.save(notes)
+    return notes
   },
   deleteCompleted() {
     const notes = this.get().filter(note => !note.is_complete)

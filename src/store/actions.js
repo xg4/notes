@@ -12,8 +12,8 @@ export default {
    * @description update note data by id
    * @param {*} note
    */
-  [types.PUT_NOTE]({ commit }, note) {
-    commit(types.PUT_NOTE, Store.put(note))
+  [types.PUT_NOTE]({ commit }, partialNote) {
+    commit(types.PUT_NOTE, Store.put(partialNote))
   },
   /**
    * @description create note
@@ -28,6 +28,9 @@ export default {
   [types.PUT_NOTES_SORT]({ commit, state }) {
     // TODO: 储存 user sort 信息，下次进入直接读取
     commit(types.PUT_NOTES_SORT, +!state.user.sort)
+  },
+  [types.DELETE_NOTE]({ commit }, id) {
+    commit(types.DELETE_NOTE, Origin.transform(Store.deleteById(id)))
   },
   /**
    * @description delete all notes

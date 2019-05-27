@@ -14,6 +14,9 @@ export default {
   [types.PUT_NOTES_SORT](state, type) {
     state.user.sort = type
   },
+  [types.DELETE_NOTE](state, notes) {
+    state.notes = notes
+  },
   [types.DELETE_NOTES](state, notes) {
     state.notes = notes
   },

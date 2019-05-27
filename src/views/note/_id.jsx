@@ -7,7 +7,13 @@ import Tag from '../../components/tag'
 export default {
   computed: {
     note() {
-      return this.$store.state.notes[this.$route.params.id] || {}
+      const note = this.$store.state.notes[this.$route.params.id]
+      if (!note) {
+        this.$router.replace('/404')
+        return {}
+      }
+      console.log(note)
+      return note
     }
   },
   methods: {

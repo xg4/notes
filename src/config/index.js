@@ -1,9 +1,10 @@
+// default title
 export const TITLE = '备忘录'
 
 // localStorage notes key
-export const STORE_KEY = 'NOTE_STORE'
+export const STORE_NOTES_KEY = 'STORE_NOTES_KEY'
 
-// 默认的tags
+// default tags
 export const TAGS = [
   {
     color: '#fff',
