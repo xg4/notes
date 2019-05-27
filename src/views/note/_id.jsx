@@ -37,6 +37,7 @@ export default {
     const {
       title,
       content,
+      tag,
       create_at,
       update_at,
       is_collect,
@@ -52,7 +53,7 @@ export default {
             </Complete>
           </li>
           <li>
-            <Tag />
+            <Tag id={tag} showName />
           </li>
           <li>
             <Collect active={is_collect} onClick={this.handleCollect}>

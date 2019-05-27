@@ -10,6 +10,8 @@ import 'animate.css'
 import './assets/css/index.less'
 
 import {
+  Popup,
+  Picker,
   Dialog,
   ActionSheet,
   Toast,
@@ -26,6 +28,8 @@ import {
   Icon
 } from 'vant'
 ;[
+  Popup,
+  Picker,
   Dialog,
   ActionSheet,
   Toast,

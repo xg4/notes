@@ -1,4 +1,5 @@
 import { Store, Origin } from '../util'
+import { Tag } from '../models'
 import * as types from './types'
 
 export default {
@@ -6,7 +7,10 @@ export default {
    * @description 初始化 app 数据
    */
   [types.APP_INIT]({ commit }) {
-    commit(types.APP_INIT, Origin.transform(Store.get()))
+    commit(types.APP_INIT, {
+      notes: Origin.transform(Store.get()),
+      tags: Tag.get()
+    })
   },
   /**
    * @description update note data by id
