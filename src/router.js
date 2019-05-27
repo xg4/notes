@@ -8,6 +8,8 @@ const CreateAndEdit = () =>
   import(/* webpackChunkName: "createAndEdit" */ './views/createAndEdit')
 
 const router = new Router({
+  mode: 'history',
+  base: '/notes/',
   routes: [
     {
       path: '/',
@@ -30,8 +32,7 @@ const router = new Router({
       name: 'new',
       meta: {
         title: '新建',
-        showNavbar: true,
-        showTabbar: true
+        showNavbar: true
       },
       component: CreateAndEdit
     },

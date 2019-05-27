@@ -43,6 +43,12 @@ export default {
     handleActionSheet() {
       this.visibleSheet = !this.visibleSheet
     },
+    confirm(message) {
+      return this.$dialog.confirm({
+        message,
+        closeOnClickOverlay: true
+      })
+    },
     handleSheetSelect(item) {
       switch (item.action) {
         case 'new':
@@ -55,27 +61,18 @@ export default {
           if (!this.$store.getters.completedNotes.length) {
             this.$toast('没有已完成的备忘录')
           } else {
-            this.$dialog
-              .confirm({
-                message: '您确定要删除已完成的备忘录吗？\n此操作不可恢复',
-                closeOnClickOverlay: true
-              })
+            this.confirm('您确定要删除已完成的备忘录吗？\n此操作不可恢复')
               .then(() => {
                 this.$store.dispatch('DELETE_COMPLETED_NOTES')
               })
               .catch(() => {})
           }
-
           break
         case 'deleteAll':
           if (!this.$store.getters.notes.length) {
             this.$toast('当前备忘录为空，您可以先新建几个')
           } else {
-            this.$dialog
-              .confirm({
-                message: '您确定要删除全部备忘录吗？\n此操作不可恢复',
-                closeOnClickOverlay: true
-              })
+            this.confirm('您确定要删除全部备忘录吗？\n此操作不可恢复')
               .then(() => {
                 this.$store.dispatch('DELETE_NOTES')
               })
@@ -86,11 +83,7 @@ export default {
           this.$router.push(`/edit/${this.$route.params.id}`)
           break
         case 'delete':
-          this.$dialog
-            .confirm({
-              message: '您确定要删除此备忘录吗？\n此操作不可恢复',
-              closeOnClickOverlay: true
-            })
+          this.confirm('您确定要删除此备忘录吗？\n此操作不可恢复')
             .then(() => {
               this.$store.dispatch('DELETE_NOTE', this.$route.params.id)
               this.$router.replace('/')

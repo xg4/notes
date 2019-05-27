@@ -12,7 +12,6 @@ export default {
         this.$router.replace('/404')
         return {}
       }
-      console.log(note)
       return note
     }
   },
