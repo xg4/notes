@@ -8,12 +8,12 @@ self.__precacheManifest = [
     "url": "js/404.5259f60e.js"
   },
   {
-    "revision": "8cbb5ec74e34b3a9fe8e",
+    "revision": "9be850fb8d514cd8cce6",
     "url": "css/app.e251bf98.css"
   },
   {
-    "revision": "8cbb5ec74e34b3a9fe8e",
-    "url": "js/app.0ce31d71.js"
+    "revision": "9be850fb8d514cd8cce6",
+    "url": "js/app.f1cfe1d0.js"
   },
   {
     "revision": "b7885ff4ab8821dc8e52",
@@ -64,7 +64,7 @@ self.__precacheManifest = [
     "url": "js/star.08c092a5.js"
   },
   {
-    "revision": "470cfe54d3c1d5891ca19e6c92cb33e4",
+    "revision": "7cca837df099e9f5dafc573a0ac6bd46",
     "url": "index.html"
   },
   {
