@@ -1,8 +1,9 @@
 import * as types from './types'
 
 export default {
-  [types.APP_INIT](state, notes) {
+  [types.APP_INIT](state, { notes, tags }) {
     state.notes = notes
+    state.tags = tags
   },
   [types.PUT_NOTE](state, note) {
     const id = note.id

@@ -10,6 +10,7 @@ export default {
     id: String,
     title: String,
     content: String,
+    tag: String,
     is_complete: Boolean,
     is_collect: Boolean,
     create_at: Number
@@ -40,6 +41,7 @@ export default {
       is_collect,
       title,
       content,
+      tag,
       handleCollect,
       handleComplete
     } = this
@@ -47,7 +49,7 @@ export default {
       <transition leave-active-class="animated bounceOutLeft">
         <router-link to={`/note/${id}`} class={styles.wrap}>
           <div class={styles.action}>
-            <Tag class={styles.tag} />
+            <Tag class={styles.tag} id={tag} />
             <Complete active={is_complete} onClick={handleComplete} />
           </div>
           <div class={styles.main}>

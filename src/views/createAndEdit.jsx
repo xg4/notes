@@ -1,8 +1,10 @@
 import { Origin } from '../util'
 import styles from './createAndEdit.module.less'
+import Tag from '../components/tag'
 
 export default {
   beforeMount() {
+    // TODO: replace with router enter ?
     if (this.hasID) {
       Object.entries(this.note).forEach(([key, value]) => {
         this[key] = value
@@ -13,8 +15,10 @@ export default {
     return {
       title: '',
       content: '',
+      tag: '',
       is_collect: false,
-      is_complete: false
+      is_complete: false,
+      showTags: false
     }
   },
   computed: {
@@ -26,6 +30,13 @@ export default {
     },
     activeID() {
       return this.$route.params.id
+    },
+    tags() {
+      return this.$store.getters.tags.map(tag => ({
+        ...tag,
+        text: `<i class="x-icon x-icon-tag" style="color:${tag.color}"></i>
+        <span style="color:${tag.color}">${tag.name}</span>`
+      }))
     }
   },
   methods: {
@@ -38,6 +49,7 @@ export default {
           content: this.content,
           is_collect: this.is_collect,
           is_complete: this.is_complete,
+          tag: this.tag,
           update_at: Date.now()
         }
         this.$store.dispatch('PUT_NOTE', note)
@@ -57,6 +69,17 @@ export default {
     },
     handleCancel() {
       this.$router.back()
+    },
+    toggleTagsVisible() {
+      this.showTags = !this.showTags
+    },
+    confirmTag(item) {
+      this.tag = item.id
+      this.showTags = false
+    },
+    cancelTag() {
+      // TODO: restore picked index
+      this.showTags = false
     }
   },
   render() {
@@ -76,6 +99,9 @@ export default {
             rows="1"
             autosize
           />
+          <van-cell onClick={this.toggleTagsVisible} title="标签" isLink>
+            {this.tag && <Tag id={this.tag} showName />}
+          </van-cell>
           <van-switch-cell vModel={this.is_collect} title="是否收藏" />
           <van-switch-cell vModel={this.is_complete} title="是否完成" />
         </van-cell-group>
@@ -94,6 +120,16 @@ export default {
             </van-button>
           )}
         </div>
+
+        <van-popup vModel={this.showTags} position="bottom">
+          <van-picker
+            showToolbar
+            defaultIndex={this.tags.findIndex(tag => tag.id === this.tag)}
+            columns={this.tags}
+            onConfirm={this.confirmTag}
+            onCancel={this.cancelTag}
+          />
+        </van-popup>
       </div>
     )
   }

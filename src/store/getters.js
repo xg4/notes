@@ -15,5 +15,8 @@ export default {
   },
   completedNotes(state, getters) {
     return getters.notes.filter(note => note.is_complete)
+  },
+  tags(state) {
+    return Object.values(state.tags)
   }
 }

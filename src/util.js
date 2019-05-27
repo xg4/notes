@@ -36,11 +36,12 @@ export const Origin = {
   /**
    * @description generate a note data
    */
-  generate({ title, content, is_collect, is_complete }) {
+  generate({ title, content, is_collect, is_complete, tag }) {
     return {
       id: nanoid(),
       title,
       content,
+      tag,
       is_collect,
       is_complete,
       create_at: Date.now(),
