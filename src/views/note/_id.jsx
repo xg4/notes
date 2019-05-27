@@ -1,5 +1,5 @@
 import styles from './_id.module.less'
-import { formatDate } from '../../util'
+import { Time } from '../../util'
 import Collect from '../../components/collect'
 import Complete from '../../components/complete'
 import Tag from '../../components/tag'
@@ -61,8 +61,8 @@ export default {
         <footer class={styles.footer}>
           <time>
             {create_at === update_at
-              ? `创建于：${formatDate(create_at)}`
-              : `更新于：${formatDate(update_at)}`}
+              ? `创建于：${Time.format(create_at)}`
+              : `更新于：${Time.format(update_at)}`}
           </time>
         </footer>
       </div>

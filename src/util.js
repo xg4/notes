@@ -2,44 +2,62 @@ import nanoid from 'nanoid'
 import dayjs from 'dayjs'
 import * as config from './config'
 
-export const formatDate = (date, formatStr) =>
-  dayjs(date).format(formatStr || 'YYYY-MM-DD HH:mm:ss')
-
-export const friendlyDate = date => {
-  const diff = type => dayjs().diff(date, type)
-  const minute = diff('minute')
-  const hour = diff('hour')
-  const day = diff('day')
-  const month = diff('month')
-  const year = diff('year')
-  return year
-    ? `${year}年前`
-    : month
-    ? `${month}月前`
-    : day
-    ? `${day}天前`
-    : hour
-    ? `${hour}小时前`
-    : minute
-    ? `${minute}分钟前`
-    : '刚刚'
+export const Time = {
+  /**
+   * @description format date
+   * @param {*} date
+   * @param {*} formatStr
+   */
+  format(date, formatStr = 'YYYY-MM-DD HH:mm:ss') {
+    return dayjs(date).format(formatStr)
+  },
+  friendly(date) {
+    const diff = type => dayjs().diff(date, type)
+    const minute = diff('minute')
+    const hour = diff('hour')
+    const day = diff('day')
+    const month = diff('month')
+    const year = diff('year')
+    return year
+      ? `${year}年前`
+      : month
+      ? `${month}月前`
+      : day
+      ? `${day}天前`
+      : hour
+      ? `${hour}小时前`
+      : minute
+      ? `${minute}分钟前`
+      : '刚刚'
+  }
 }
 
-export const generateNote = ({ title, content, is_collect, is_complete }) => ({
-  id: nanoid(),
-  title,
-  content,
-  is_collect,
-  is_complete,
-  create_at: Date.now(),
-  update_at: Date.now()
-})
-
-export const transformOriginData = notes =>
-  notes.reduce((store, note) => {
-    store[note.id] = note
-    return store
-  }, {})
+export const Origin = {
+  /**
+   * @description generate a note data
+   */
+  generate({ title, content, is_collect, is_complete }) {
+    return {
+      id: nanoid(),
+      title,
+      content,
+      is_collect,
+      is_complete,
+      create_at: Date.now(),
+      update_at: Date.now()
+    }
+  },
+  /**
+   * @description transform raw data to use
+   * @param {*} notes
+   */
+  transform(notes) {
+    return notes.reduce((store, note) => {
+      store[note.id] = note
+      return store
+    }, {})
+  }
+}
 
 export const Store = {
   get() {

@@ -1,4 +1,4 @@
-import { generateNote } from '../util'
+import { Origin } from '../util'
 import styles from './new.module.less'
 
 export default {
@@ -12,7 +12,7 @@ export default {
   },
   methods: {
     handleSubmit() {
-      const note = generateNote(this)
+      const note = Origin.generate(this)
       this.$store.dispatch('POST_NOTE', note)
       this.$toast.success('保存成功')
       this.$router.push(`/note/${note.id}`)

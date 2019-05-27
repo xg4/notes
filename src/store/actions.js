@@ -1,4 +1,4 @@
-import { Store, transformOriginData } from '../util'
+import { Store, Origin } from '../util'
 import * as types from './types'
 
 export default {
@@ -6,7 +6,7 @@ export default {
    * @description 初始化 app 数据
    */
   [types.APP_INIT]({ commit }) {
-    commit(types.APP_INIT, transformOriginData(Store.get()))
+    commit(types.APP_INIT, Origin.transform(Store.get()))
   },
   /**
    * @description update note data by id
@@ -33,7 +33,7 @@ export default {
    * @description delete all notes
    */
   [types.DELETE_NOTES]({ commit }) {
-    commit(types.DELETE_NOTES, transformOriginData(Store.delete()))
+    commit(types.DELETE_NOTES, Origin.transform(Store.delete()))
   },
   /**
    * @description delete completed notes
@@ -41,7 +41,7 @@ export default {
   [types.DELETE_COMPLETED_NOTES]({ commit }) {
     commit(
       types.DELETE_COMPLETED_NOTES,
-      transformOriginData(Store.deleteCompleted())
+      Origin.transform(Store.deleteCompleted())
     )
   }
 }
