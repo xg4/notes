@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import * as config from './config'
+import { TITLE } from './config'
 
 Vue.use(Router)
 
@@ -13,7 +13,12 @@ const router = new Router({
         title: '备忘录',
         showNavbar: true,
         showTabbar: true,
-        actionSheet: 'notes'
+        actionSheet: [
+          { name: '新建笔记', action: 'new' },
+          { name: '按时间排序', action: 'sort' },
+          { name: '删除已完成', action: 'deleteCompleted' },
+          { name: '删除全部', action: 'deleteAll' }
+        ]
       },
       component: () => import(/* webpackChunkName: "home" */ './views/index')
     },
@@ -77,7 +82,7 @@ const router = new Router({
 })
 
 router.beforeEach((to, from, next) => {
-  document.title = to.meta.title || config.title
+  document.title = to.meta.title || TITLE
   next()
 })
 

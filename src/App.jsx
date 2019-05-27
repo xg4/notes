@@ -1,6 +1,6 @@
 import classNames from 'classnames'
 import styles from './App.module.less'
-import * as config from './config'
+import { TITLE } from './config'
 
 export default {
   beforeMount() {
@@ -14,7 +14,7 @@ export default {
   },
   computed: {
     title() {
-      return this.$route.meta.title || config.title
+      return this.$route.meta.title || TITLE
     },
     showNavbar() {
       return this.$route.meta.showNavbar
@@ -26,9 +26,7 @@ export default {
       return !!this.$route.meta.actionSheet
     },
     actionSheet() {
-      return this.hasActionSheet
-        ? config.ACTION_SHEET_MAP[this.$route.meta.actionSheet]
-        : []
+      return this.hasActionSheet ? this.$route.meta.actionSheet : []
     }
   },
   watch: {
@@ -90,14 +88,13 @@ export default {
     }
   },
   render() {
-    const { showNavbar, showTabbar } = this
     return (
       <main>
         <van-nav-bar
-          vShow={showNavbar}
+          vShow={this.showNavbar}
           title={this.title}
-          left-text="返回"
-          left-arrow
+          leftText="返回"
+          leftArrow
           fixed
           onClick-left={this.handleBack}
           onClick-right={this.handleActionSheet}
@@ -109,19 +106,19 @@ export default {
             vModel={this.visibleSheet}
             actions={this.actionSheet}
             onSelect={this.handleSheetSelect}
-            cancel-text="取消"
-            close-on-click-action
+            cancelText="取消"
+            closeOnClickAction
           />
         )}
 
         <router-view
           class={classNames(
-            { [styles.top]: showNavbar },
-            { [styles.bottom]: showTabbar }
+            { [styles.top]: this.showNavbar },
+            { [styles.bottom]: this.showTabbar }
           )}
         />
 
-        <van-tabbar vShow={showTabbar} route>
+        <van-tabbar vShow={this.showTabbar} route>
           <van-tabbar-item replace to="/" icon="label-o">
             记录
           </van-tabbar-item>
