@@ -8,8 +8,6 @@ const CreateAndEdit = () =>
   import(/* webpackChunkName: "createAndEdit" */ './views/createAndEdit')
 
 const router = new Router({
-  mode: 'history',
-  base: '/notes/',
   routes: [
     {
       path: '/',

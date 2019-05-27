@@ -1,4 +1,4 @@
 module.exports = {
-  publicPath: '/notes/',
+  publicPath: './',
   productionSourceMap: false
 }
