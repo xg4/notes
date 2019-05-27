@@ -14,9 +14,7 @@ export default {
         {this.notes.length ? (
           <transition-group name="flip-list" tag="div">
             {this.notes.map(item => (
-              <div key={item.id}>
-                <Card {...{ attrs: item }} />
-              </div>
+              <Card {...{ attrs: item }} key={item.id} />
             ))}
           </transition-group>
         ) : (
