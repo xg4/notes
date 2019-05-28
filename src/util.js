@@ -6,11 +6,17 @@ export function formatDate(date, formatStr = 'YYYY-MM-DD HH:mm:ss') {
 
 formatDate.friendly = date => {
   const diff = type => dayjs().diff(date, type)
-  const minute = diff('minute')
-  const hour = diff('hour')
-  const day = diff('day')
-  const month = diff('month')
-  const year = diff('year')
+
+  const [year, month, day, hour, minute] = [
+    diff('year'),
+    diff('month'),
+    diff('day'),
+    diff('hour'),
+    diff('minute')
+  ].map(v => (v < 0 ? 0 : v))
+
+  const second = diff('second')
+
   return year
     ? `${year}年前`
     : month
@@ -21,5 +27,7 @@ formatDate.friendly = date => {
     ? `${hour}小时前`
     : minute
     ? `${minute}分钟前`
+    : second < 0
+    ? '未来'
     : '刚刚'
 }

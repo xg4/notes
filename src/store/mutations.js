@@ -15,5 +15,8 @@ export default {
   },
   [types.PUT_TAGS](state, tags) {
     state.tags = tags
+  },
+  [types.PUT_USER](state, user) {
+    state.user = user
   }
 }
