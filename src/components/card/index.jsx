@@ -13,7 +13,8 @@ export default {
     tag: String,
     is_complete: Boolean,
     is_collect: Boolean,
-    create_at: Number
+    create_at: Number,
+    update_at: Number
   },
   methods: {
     handleComplete(ev) {
@@ -36,7 +37,7 @@ export default {
   render() {
     const {
       id,
-      create_at,
+      update_at,
       is_complete,
       is_collect,
       title,
@@ -61,7 +62,7 @@ export default {
           <div class={styles.control}>
             <Collect active={is_collect} onClick={handleCollect} />
 
-            <time>{formatDate.friendly(create_at)}</time>
+            <time>{formatDate.friendly(update_at)}</time>
           </div>
         </router-link>
       </transition>

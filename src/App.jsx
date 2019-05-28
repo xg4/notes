@@ -55,7 +55,10 @@ export default {
           this.$router.push('/new')
           break
         case 'sort':
-          this.$store.dispatch('PUT_NOTES_SORT')
+          this.$store.dispatch(
+            'PUT_NOTES_SORT',
+            [1, 0][this.$store.state.user.sort] || 0
+          )
           break
         case 'deleteCompleted':
           if (!this.$store.getters.completedNotes.length) {

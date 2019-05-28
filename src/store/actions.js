@@ -25,9 +25,8 @@ export default {
   /**
    * @description update notes sort type
    */
-  [types.PUT_NOTES_SORT]({ commit, state }) {
-    // TODO: Save the sort type as user info
-    commit(types.PUT_NOTES_SORT, +!state.user.sort)
+  [types.PUT_NOTES_SORT]({ commit }, type) {
+    commit(types.PUT_NOTES_SORT, User.putSort(type).sort)
   },
   [types.DELETE_NOTE]({ commit }, id) {
     commit(types.PUT_NOTES, Note.deleteById(id))
