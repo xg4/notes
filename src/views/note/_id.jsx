@@ -5,15 +5,25 @@ import Complete from '../../components/complete'
 import Tag from '../../components/tag'
 
 export default {
-  // TODO: Verify that there is a note in BeforeRouterEnter
+  created() {
+    if (!this.hasNote) {
+      this.$router.replace('/404')
+    }
+  },
   computed: {
+    id() {
+      return this.$route.params.id
+    },
+    hasNote() {
+      return !!this.$store.state.notes[this.id]
+    },
     note() {
-      return this.$store.state.notes[this.$route.params.id]
+      return this.$store.state.notes[this.id] || {}
     }
   },
   methods: {
     handleComplete(ev) {
-      // ev.preventDefault()
+      ev.preventDefault()
       ev.stopPropagation()
       this.$store.dispatch('PUT_NOTE', {
         id: this.note.id,
@@ -21,7 +31,7 @@ export default {
       })
     },
     handleCollect(ev) {
-      // ev.preventDefault()
+      ev.preventDefault()
       ev.stopPropagation()
       this.$store.dispatch('PUT_NOTE', {
         id: this.note.id,

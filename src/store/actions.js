@@ -1,4 +1,4 @@
-import { Tag, Note } from '../models'
+import { Tag, Note, User } from '../models'
 import * as types from './types'
 
 export default {
@@ -8,6 +8,7 @@ export default {
   [types.APP_INIT]({ commit }) {
     commit(types.PUT_NOTES, Note.init())
     commit(types.PUT_TAGS, Tag.init())
+    commit(types.PUT_USER, User.init())
   },
   /**
    * @description update note data by id

@@ -18,3 +18,5 @@ export const DELETE_COMPLETED_NOTES = 'DELETE_COMPLETED_NOTES'
 export const PUT_NOTES = 'PUT_NOTES'
 
 export const PUT_TAGS = 'PUT_TAGS'
+
+export const PUT_USER = 'PUT_USER'

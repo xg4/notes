@@ -3,8 +3,7 @@ import styles from './createAndEdit.module.less'
 import Tag from '../components/tag'
 
 export default {
-  beforeMount() {
-    // TODO: replace with router enter ?
+  created() {
     if (this.hasID) {
       Object.entries(this.note).forEach(([key, value]) => {
         this[key] = value
@@ -41,9 +40,8 @@ export default {
   },
   methods: {
     handleSubmit() {
-      let note
       if (this.hasID) {
-        note = {
+        const note = {
           id: this.id,
           title: this.title,
           content: this.content,
@@ -55,7 +53,7 @@ export default {
         this.$store.dispatch('PUT_NOTE', note)
         this.$router.back()
       } else {
-        note = Note.new(this)
+        const note = Note.new(this)
         this.$store.dispatch('POST_NOTE', note)
         this.$router.replace(`/note/${note.id}`)
       }
@@ -66,6 +64,7 @@ export default {
       this.content = ''
       this.is_collect = false
       this.is_complete = false
+      this.tag = ''
     },
     handleCancel() {
       this.$router.back()

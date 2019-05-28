@@ -1,2 +1,3 @@
+export { default as Note } from './notes'
+export { default as User } from './user'
 export { default as Tag } from './tags'
-export { default as Note } from './notes.js'
