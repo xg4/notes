@@ -21,6 +21,9 @@ export default {
     showTabbar() {
       return this.$route.meta.showTabbar
     },
+    hideBack() {
+      return this.showTabbar
+    },
     hasActionSheet() {
       return !!this.$route.meta.actionSheet
     },
@@ -103,11 +106,12 @@ export default {
         <van-nav-bar
           vShow={this.showNavbar}
           title={this.title}
-          leftText="返回"
-          leftArrow
           fixed
           onClick-left={this.handleBack}
           onClick-right={this.toggleActionSheet}
+          {...{
+            attrs: this.hideBack ? {} : { leftText: '返回', leftArrow: true }
+          }}
         >
           {this.hasActionSheet && <van-icon name="ellipsis" slot="right" />}
         </van-nav-bar>

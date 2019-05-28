@@ -18,7 +18,7 @@ export default {
   },
   methods: {
     handleComplete(ev) {
-      // ev.preventDefault()
+      ev.preventDefault()
       ev.stopPropagation()
       this.$store.dispatch('PUT_NOTE', {
         id: this.id,
@@ -26,7 +26,7 @@ export default {
       })
     },
     handleCollect(ev) {
-      // ev.preventDefault()
+      ev.preventDefault()
       ev.stopPropagation()
       this.$store.dispatch('PUT_NOTE', {
         id: this.id,

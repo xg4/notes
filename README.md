@@ -11,7 +11,7 @@ Any
 
 - Fork it
 
-- submit pull request
+- Submit pull request
 
 ## LICENSE
 
