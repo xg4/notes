@@ -74,17 +74,17 @@ export default {
   },
   delete() {
     this.save([])
-    return []
+    return this.transform([])
   },
   deleteById(id) {
     const notes = this.get().filter(note => note.id !== id)
     this.save(notes)
-    return notes
+    return this.transform(notes)
   },
   deleteCompleted() {
     const notes = this.get().filter(note => !note.is_complete)
     this.save(notes)
-    return notes
+    return this.transform(notes)
   },
   save(notes) {
     return localStorage.setItem(STORE_NOTES_KEY, JSON.stringify(notes))
