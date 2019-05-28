@@ -39,7 +39,7 @@ export default {
     handleBack() {
       this.$router.back()
     },
-    handleActionSheet() {
+    toggleActionSheet() {
       this.visibleSheet = !this.visibleSheet
     },
     confirm(message) {
@@ -48,7 +48,7 @@ export default {
         closeOnClickOverlay: true
       })
     },
-    handleSheetSelect(item) {
+    handleActionSheet(item) {
       switch (item.action) {
         case 'new':
           this.$router.push('/new')
@@ -107,7 +107,7 @@ export default {
           leftArrow
           fixed
           onClick-left={this.handleBack}
-          onClick-right={this.handleActionSheet}
+          onClick-right={this.toggleActionSheet}
         >
           {this.hasActionSheet && <van-icon name="ellipsis" slot="right" />}
         </van-nav-bar>
@@ -115,7 +115,7 @@ export default {
           <van-action-sheet
             vModel={this.visibleSheet}
             actions={this.actionSheet}
-            onSelect={this.handleSheetSelect}
+            onSelect={this.handleActionSheet}
             cancelText="取消"
             closeOnClickAction
           />

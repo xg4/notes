@@ -35,7 +35,6 @@
     ]
   },
   "dependencies": {
-    "animate.css": "^3.7.0",
     "classnames": "^2.2.6",
     "core-js": "^2.6.5",
     "dayjs": "^1.8.14",

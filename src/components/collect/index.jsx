@@ -1,13 +1,16 @@
 import styles from './index.module.less'
+import classNames from 'classnames'
 
 export default ({ props: { active }, listeners: { click }, children }) => {
   return (
-    <transition mode="out-in" enter-active-class="animated zoomIn">
-      <a key={active} href="javascript:;" onClick={click} class={styles.wrap}>
-        <van-icon name={active ? 'star' : 'star-o'} />
-
-        {children && <span class={styles.text}>{children}</span>}
-      </a>
-    </transition>
+    <a href="javascript:;" onClick={click} class={styles.wrap}>
+      <transition mode="out-in" name="animate-fade">
+        <i
+          key={active}
+          class={classNames('x-icon', `x-icon-favor${active ? '' : '-fill'}`)}
+        />
+      </transition>
+      {children && <span class={styles.text}>{children}</span>}
+    </a>
   )
 }

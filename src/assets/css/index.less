@@ -28,6 +28,16 @@
   font-size: 16px;
 }
 
+.animate-fade {
+  &-enter-active {
+    animation: fadeIn 0.3s ease-in;
+  }
+
+  &-leave-active {
+    animation: fadeOut 0.3s ease-out;
+  }
+}
+
 .animate-tabbar {
   &-enter-active {
     animation: slideInUp 0.3s ease-in;

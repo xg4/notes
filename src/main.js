@@ -5,8 +5,6 @@ import store from './store'
 import './registerServiceWorker'
 
 import 'normalize.css'
-import 'animate.css'
-// import 'vant/lib/index.css'
 import './assets/css/index.less'
 
 import {
