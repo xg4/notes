@@ -4,6 +4,7 @@ import { TITLE } from './config'
 
 Vue.use(Router)
 
+const Notes = () => import(/* webpackChunkName: "notes" */ './views/index')
 const CreateAndEdit = () =>
   import(/* webpackChunkName: "createAndEdit" */ './views/createAndEdit')
 
@@ -23,7 +24,7 @@ const router = new Router({
           { name: '删除全部', action: 'deleteAll' }
         ]
       },
-      component: () => import(/* webpackChunkName: "home" */ './views/index')
+      component: Notes
     },
     {
       path: '/new',
@@ -44,14 +45,14 @@ const router = new Router({
       component: CreateAndEdit
     },
     {
-      path: '/star',
-      name: 'star',
+      path: '/collection',
+      name: 'collection',
       meta: {
         title: '收藏',
         showNavbar: true,
         showTabbar: true
       },
-      component: () => import(/* webpackChunkName: "star" */ './views/star')
+      component: Notes
     },
     {
       path: '/profile',

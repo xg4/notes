@@ -3,12 +3,11 @@ import styles from './App.module.less'
 import { TITLE } from './config'
 
 export default {
-  beforeMount() {
+  created() {
     this.$store.dispatch('APP_INIT')
   },
   data() {
     return {
-      transitionName: 'slideInLeft',
       visibleSheet: false
     }
   },
@@ -129,20 +128,22 @@ export default {
           )}
         />
 
-        <van-tabbar vShow={this.showTabbar} route>
-          <van-tabbar-item replace to="/" icon="label-o">
-            记录
-          </van-tabbar-item>
-          <van-tabbar-item to="/new" icon="add-o">
-            新建
-          </van-tabbar-item>
-          <van-tabbar-item replace to="/star" icon="star-o">
-            收藏
-          </van-tabbar-item>
-          <van-tabbar-item replace to="/profile" icon="user-circle-o">
-            我的
-          </van-tabbar-item>
-        </van-tabbar>
+        <transition name="animate-tabbar">
+          <van-tabbar vShow={this.showTabbar} route>
+            <van-tabbar-item replace to="/" icon="label-o">
+              记录
+            </van-tabbar-item>
+            <van-tabbar-item to="/new" icon="add-o">
+              新建
+            </van-tabbar-item>
+            <van-tabbar-item replace to="/collection" icon="star-o">
+              收藏
+            </van-tabbar-item>
+            <van-tabbar-item replace to="/profile" icon="user-circle-o">
+              我的
+            </van-tabbar-item>
+          </van-tabbar>
+        </transition>
       </main>
     )
   }

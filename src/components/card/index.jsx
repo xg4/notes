@@ -47,25 +47,23 @@ export default {
       handleComplete
     } = this
     return (
-      <transition leave-active-class="animated bounceOutLeft">
-        <router-link to={`/note/${id}`} class={styles.wrap}>
-          <div class={styles.action}>
-            <Tag class={styles.tag} id={tag} />
-            <Complete active={is_complete} onClick={handleComplete} />
+      <router-link to={`/note/${id}`} class={styles.wrap}>
+        <div class={styles.action}>
+          <Tag class={styles.tag} id={tag} />
+          <Complete active={is_complete} onClick={handleComplete} />
+        </div>
+        <div class={styles.main}>
+          <div class={classNames('ellipsis', styles.title)}>{title}</div>
+          <div class={classNames(styles.content)}>
+            <p class="ellipsis-2">{content}</p>
           </div>
-          <div class={styles.main}>
-            <div class={classNames('ellipsis', styles.title)}>{title}</div>
-            <div class={classNames(styles.content)}>
-              <p class="ellipsis-2">{content}</p>
-            </div>
-          </div>
-          <div class={styles.control}>
-            <Collect active={is_collect} onClick={handleCollect} />
+        </div>
+        <div class={styles.control}>
+          <Collect active={is_collect} onClick={handleCollect} />
 
-            <time>{formatDate.friendly(update_at)}</time>
-          </div>
-        </router-link>
-      </transition>
+          <time>{formatDate.friendly(update_at)}</time>
+        </div>
+      </router-link>
     )
   }
 }

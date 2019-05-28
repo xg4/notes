@@ -1,5 +1,6 @@
 @import './reset.less';
 @import './mixins/index.less';
+@import './animate.less';
 
 :root {
   --bgColor: #fff;
@@ -25,4 +26,29 @@
 
 .x-icon {
   font-size: 16px;
+}
+
+.animate-tabbar {
+  &-enter-active {
+    animation: slideInUp 0.3s ease-in;
+  }
+
+  &-leave-active {
+    animation: slideOutDown 0.3s ease-out;
+  }
+}
+
+.animate-notes {
+  &-move {
+    filter: blur(5px);
+    transition: transform 0.3s ease-in-out;
+  }
+
+  &-enter-active {
+    animation: slideInLeft 0.3s ease-in, blurIn 0.3s ease-in;
+  }
+
+  &-leave-active {
+    animation: slideOutLeft 0.3s ease-out, blurOut 0.3s ease-out;
+  }
 }
