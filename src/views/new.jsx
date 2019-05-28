@@ -38,7 +38,7 @@ export default {
     }
   },
   methods: {
-    handleSubmit() {
+    async handleSubmit() {
       if (this.hasID) {
         const note = {
           id: this.id,
@@ -52,7 +52,7 @@ export default {
         this.$store.dispatch('PUT_NOTE', note)
         this.$router.back()
       } else {
-        const note = this.$store.dispatch('POST_NOTE', this)
+        const note = await this.$store.dispatch('POST_NOTE', this)
         this.$router.replace(`/note/${note.id}`)
       }
       this.$toast.success('保存成功')
