@@ -19,8 +19,10 @@ export default {
   /**
    * @description create note
    */
-  [types.POST_NOTE]({ commit }, note) {
-    commit(types.POST_NOTE, Note.post(note))
+  [types.POST_NOTE]({ commit }, partialNote) {
+    const note = Note.post(partialNote)
+    commit(types.POST_NOTE, note)
+    return note
   },
   /**
    * @description update notes sort type

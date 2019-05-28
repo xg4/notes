@@ -2,10 +2,18 @@ import nanoid from 'nanoid'
 import { STORE_NOTES_KEY } from '../config'
 
 export default {
+  normalize() {
+    return [
+      this.new({
+        title: '欢迎使用备忘录',
+        content: '在这里记录一些事情吧'
+      })
+    ]
+  },
   /**
    * @description generate a note data
    */
-  new({ title, content, is_collect, is_complete, tag }) {
+  new({ title, content, tag, is_collect = false, is_complete = false }) {
     return {
       id: nanoid(),
       title,
@@ -28,16 +36,21 @@ export default {
     }, {})
   },
   init() {
-    return this.transform(this.get())
+    let notes = this.get()
+    if (!notes || !notes.length) {
+      notes = this.normalize()
+      this.save(notes)
+    }
+    return this.transform(notes)
   },
   get() {
-    const notes = JSON.parse(localStorage.getItem(STORE_NOTES_KEY) || null)
-    return notes || []
+    return JSON.parse(localStorage.getItem(STORE_NOTES_KEY) || null) || []
   },
   getById(id) {
     return this.get().find(note => note.id === id) || {}
   },
-  post(note) {
+  post(partialNote) {
+    const note = this.new(partialNote)
     const notes = this.get() || []
     notes.push(note)
     this.save(notes)

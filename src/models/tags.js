@@ -42,15 +42,15 @@ export default {
     ]
   },
   init() {
-    return this.transform(this.get())
-  },
-  get() {
-    let tags = JSON.parse(localStorage.getItem(STORE_TAGS_KEY) || null)
-    if (!tags) {
+    let tags = this.get()
+    if (!tags || !tags.length) {
       tags = this.normalize()
       this.save(tags)
     }
-    return tags
+    return this.transform(tags)
+  },
+  get() {
+    return JSON.parse(localStorage.getItem(STORE_TAGS_KEY) || null) || []
   },
   save(tags) {
     return localStorage.setItem(STORE_TAGS_KEY, JSON.stringify(tags))

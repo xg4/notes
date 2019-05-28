@@ -7,7 +7,10 @@ export default ({ props: { active }, listeners: { click }, children }) => {
       <transition mode="out-in" name="animate-fade">
         <i
           key={active}
-          class={classNames('x-icon', `x-icon-favor${active ? '' : '-fill'}`)}
+          class={classNames(
+            'x-icon',
+            `x-icon-${active ? 'favor-fill' : 'favor'}`
+          )}
         />
       </transition>
       {children && <span class={styles.text}>{children}</span>}

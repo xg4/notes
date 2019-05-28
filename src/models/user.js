@@ -5,9 +5,7 @@ export default {
   normalize() {
     return {
       id: nanoid(),
-      // null: 默认排序 (default)
-      // 0: update_at 升序
-      // 1: update_at 降序
+      // null: 默认排序 (default)， 0: update_at 升序， 1: update_at 降序
       sort: null
     }
   },

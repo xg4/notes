@@ -1,4 +1,3 @@
-import { Note } from '../models'
 import styles from './new.module.less'
 import Tag from '../components/tag'
 
@@ -53,8 +52,7 @@ export default {
         this.$store.dispatch('PUT_NOTE', note)
         this.$router.back()
       } else {
-        const note = Note.new(this)
-        this.$store.dispatch('POST_NOTE', note)
+        const note = this.$store.dispatch('POST_NOTE', this)
         this.$router.replace(`/note/${note.id}`)
       }
       this.$toast.success('保存成功')
