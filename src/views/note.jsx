@@ -1,8 +1,8 @@
-import styles from './_id.module.less'
-import { formatDate } from '../../util'
-import Collect from '../../components/collect'
-import Complete from '../../components/complete'
-import Tag from '../../components/tag'
+import styles from './note.module.less'
+import { formatDate } from '../util'
+import Collect from '../components/collect'
+import Complete from '../components/complete'
+import Tag from '../components/tag'
 
 export default {
   created() {

@@ -1,5 +1,5 @@
 import { Note } from '../models'
-import styles from './createAndEdit.module.less'
+import styles from './new.module.less'
 import Tag from '../components/tag'
 
 export default {

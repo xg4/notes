@@ -4,9 +4,8 @@ import { TITLE } from './config'
 
 Vue.use(Router)
 
-const Notes = () => import(/* webpackChunkName: "notes" */ './views/index')
-const CreateAndEdit = () =>
-  import(/* webpackChunkName: "createAndEdit" */ './views/createAndEdit')
+const Notes = () => import(/* webpackChunkName: "notes" */ './views/notes')
+const New = () => import(/* webpackChunkName: "new" */ './views/new')
 
 const router = new Router({
   routes: [
@@ -33,7 +32,7 @@ const router = new Router({
         title: '新建',
         showNavbar: true
       },
-      component: CreateAndEdit
+      component: New
     },
     {
       path: '/edit/:id',
@@ -42,7 +41,7 @@ const router = new Router({
         title: '编辑',
         showNavbar: true
       },
-      component: CreateAndEdit
+      component: New
     },
     {
       path: '/collection',
@@ -67,7 +66,7 @@ const router = new Router({
     },
     {
       path: '/note/:id',
-      name: 'note_id',
+      name: 'note',
       meta: {
         title: '详情',
         showNavbar: true,
@@ -76,8 +75,7 @@ const router = new Router({
           { name: '删除', action: 'delete' }
         ]
       },
-      component: () =>
-        import(/* webpackChunkName: "detail" */ './views/note/_id')
+      component: () => import(/* webpackChunkName: "note" */ './views/note')
     },
     {
       path: '*',
