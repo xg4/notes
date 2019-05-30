@@ -1,12 +1,13 @@
-import { Tag, Note, User } from '../models'
+import { Tag, User } from '../models'
 import * as types from './types'
+import { Note } from '../service'
 
 export default {
   /**
    * @description Initialize app data
    */
   [types.APP_INIT]({ commit }) {
-    commit(types.PUT_NOTES, Note.init())
+    commit(types.PUT_NOTES, Note.find())
     commit(types.PUT_TAGS, Tag.init())
     commit(types.PUT_USER, User.init())
   },
@@ -18,17 +19,20 @@ export default {
   /**
    * @description update note data by id
    */
-  [types.PUT_NOTE]({ commit }, partialNote) {
-    commit(types.PUT_NOTE, Note.put(partialNote))
+  async [types.PUT_NOTE]({ commit }, { id, ...partialNote }) {
+    commit(types.PUT_NOTE, await Note.findByIdAndUpdate(id, partialNote))
   },
   /**
    * @description create note
    */
   [types.POST_NOTE]({ commit }, partialNote) {
-    return new Promise(resolve => {
-      const note = Note.post(partialNote)
-      commit(types.POST_NOTE, note)
-      resolve(note)
+    return new Promise((resolve, reject) => {
+      Note.create(partialNote)
+        .then(note => {
+          commit(types.POST_NOTE, note)
+          resolve(note)
+        })
+        .catch(reject)
     })
   },
   /**
@@ -37,8 +41,8 @@ export default {
   [types.PUT_NOTES_SORT]({ commit }, type) {
     commit(types.PUT_NOTES_SORT, User.putSort(type).sort)
   },
-  [types.DELETE_NOTE]({ commit }, id) {
-    commit(types.PUT_NOTES, Note.deleteById(id))
+  async [types.DELETE_NOTE]({ commit }, id) {
+    commit(types.PUT_NOTES, await Note.deleteById(id))
   },
   /**
    * @description delete all notes
@@ -50,6 +54,6 @@ export default {
    * @description delete completed notes
    */
   [types.DELETE_COMPLETED_NOTES]({ commit }) {
-    commit(types.PUT_NOTES, Note.deleteCompleted())
+    commit(types.PUT_NOTES, Note.delete({ is_complete: true }))
   }
 }

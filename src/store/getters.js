@@ -5,9 +5,13 @@ const SORT_MAP = {
 
 export default {
   notes(state) {
-    const notes = Object.values(state.notes)
     const sortFunc = SORT_MAP[state.user.sort]
-    return sortFunc ? notes.sort(sortFunc) : notes
+    return sortFunc ? state.notes.sort(sortFunc) : state.notes
+  },
+  getNoteById(state) {
+    return id => {
+      return state.notes.find(note => note.id === id)
+    }
   },
   collectedNotes(state, getters) {
     return getters.notes.filter(note => note.is_collect)

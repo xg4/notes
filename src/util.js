@@ -65,23 +65,58 @@ export function download() {
   })
 }
 
-export function merge(target, source) {
-  source = source.reduce((store, item) => {
-    store[item.id] = item
-    return store
-  }, Object.create(null))
+/**
+ * @description 严格模式：判断两个对象下的所有 key-value 是否相等
+ *              松散模式：以 a 对象的keys 和 b 进行比对（b中可以多一些key）
+ * @param {Object} a
+ * @param {Object} b
+ */
+export function equalObject(a, b, strict) {
+  const keys = Object.keys(a)
+  if (strict && keys.length !== Object.keys(b).length) {
+    return false
+  }
+  return keys.every(key => a[key] === b[key])
+}
 
-  return target.reduce((store, item) => {
-    const current = store[item.id]
-    if (current) {
-      if (item.update_at > current.update_at) {
+/**
+ * @description 将数组转换成指定 key 的对象，没有指定 key 时，用 index 代替
+ * @param {Object[]} arr
+ * @param {String} arrKey
+ */
+export function array2Object(arr, arrKey = 'id') {
+  return arr.reduce((acc, cur, index) => {
+    const key = cur[arrKey] || index
+    // TODO: deep clone
+    acc[key] = { ...cur }
+    return acc
+  }, Object.create(null))
+}
+
+/**
+ * @description 合并两个数组，并去重
+ * @param {Array} target
+ * @param {Array} source
+ * @param {Function} func
+ */
+export function merge(
+  target,
+  source,
+  func = (a, b) => a.update_at > b.update_at
+) {
+  return Object.values(
+    target.reduce((store, item) => {
+      const current = store[item.id]
+      if (current) {
+        if (func(item, current)) {
+          store[item.id] = item
+        }
+      } else {
         store[item.id] = item
       }
-    } else {
-      store[item.id] = item
-    }
-    return store
-  }, source)
+      return store
+    }, array2Object(source))
+  )
 }
 
 export function upload(file) {

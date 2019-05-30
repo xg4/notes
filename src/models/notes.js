@@ -35,6 +35,7 @@ export default {
    * @description transform raw data to use
    * @param {*} notes
    */
+  //////
   transform(notes) {
     return notes.reduce((store, note) => {
       store[note.id] = note
@@ -49,12 +50,15 @@ export default {
     }
     return this.transform(notes)
   },
+  ///////
   get() {
     return JSON.parse(localStorage.getItem(STORE_NOTES_KEY) || null) || []
   },
+  /////////////
   getById(id) {
     return this.get().find(note => note.id === id) || {}
   },
+  //////
   post(partialNote) {
     const note = this.new(partialNote)
     const notes = this.get() || []
@@ -62,6 +66,7 @@ export default {
     this.save(notes)
     return note
   },
+  //////
   put(partialNote) {
     if (!partialNote.id) {
       return

@@ -7,7 +7,7 @@ import mutations from './mutations'
 Vue.use(Vuex)
 
 const state = {
-  notes: {},
+  notes: [],
   tags: {},
   user: {
     // 0(default): sort by note.update_at
