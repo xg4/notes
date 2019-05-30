@@ -1,6 +1,5 @@
 import { Note, User, Tag } from './models'
 import dayjs from 'dayjs'
-import { Dialog } from 'vant'
 
 export function formatDate(date, formatStr = 'YYYY-MM-DD HH:mm:ss') {
   return dayjs(date).format(formatStr)
@@ -34,32 +33,73 @@ formatDate.friendly = date => {
     : '刚刚'
 }
 
+const triggerDownload = rawData => {
+  const url = URL.createObjectURL(rawData)
+  const a = document.createElement('a')
+  a.href = url
+  a.download = 'notes.json'
+  a.style.display = 'none'
+  document.body.appendChild(a)
+  a.click()
+  document.body.removeChild(a)
+  URL.revokeObjectURL(url)
+}
+
 export function download() {
-  const backup = {
-    notes: Note.get(),
-    user: User.get(),
-    tags: Tag.get()
-  }
+  return new Promise((resolve, reject) => {
+    const backup = {
+      notes: Note.get(),
+      user: User.get(),
+      tags: Tag.get()
+    }
 
-  const triggerDownload = rawData => {
-    const url = URL.createObjectURL(rawData)
-    const a = document.createElement('a')
-    a.href = url
-    a.download = 'notes.json'
-    a.style.display = 'none'
-    document.body.appendChild(a)
-    a.click()
-    document.body.removeChild(a)
-    URL.revokeObjectURL(url)
-  }
-
-  try {
-    triggerDownload(
-      new Blob([JSON.stringify(backup)], {
+    try {
+      const data = new Blob([JSON.stringify(backup)], {
         type: 'application/json'
       })
-    )
-  } catch (err) {
-    Dialog({ title: '下载失败', message: '请使用最新版浏览器进行下载' })
-  }
+      triggerDownload(data)
+      resolve()
+    } catch (err) {
+      reject({ message: '请使用最新的Chrome浏览器进行下载' })
+    }
+  })
+}
+
+export function merge(target, source) {
+  source = source.reduce((store, item) => {
+    store[item.id] = item
+    return store
+  }, Object.create(null))
+
+  return target.reduce((store, item) => {
+    const current = store[item.id]
+    if (current) {
+      if (item.update_at > current.update_at) {
+        store[item.id] = item
+      }
+    } else {
+      store[item.id] = item
+    }
+    return store
+  }, source)
+}
+
+export function upload(file) {
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader()
+
+    reader.readAsText(file, 'UTF-8')
+
+    reader.onload = function(evt) {
+      try {
+        resolve(JSON.parse(evt.target.result))
+      } catch {
+        reject('读取文件错误，请重试')
+      }
+    }
+
+    reader.onerror = function() {
+      reject('读取文件错误，请重试')
+    }
+  })
 }

@@ -10,6 +10,11 @@ export default {
     commit(types.PUT_TAGS, Tag.init())
     commit(types.PUT_USER, User.init())
   },
+  [types.UPLOAD_DATA]({ commit }, { notes, user, tags }) {
+    commit(types.PUT_NOTES, Note.merge(notes))
+    commit(types.PUT_USER, User.merge(user))
+    commit(types.PUT_TAGS, Tag.merge(tags))
+  },
   /**
    * @description update note data by id
    */

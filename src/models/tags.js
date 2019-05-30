@@ -1,7 +1,13 @@
 import nanoid from 'nanoid'
 import { STORE_TAGS_KEY } from '../config'
+import { merge } from '../util'
 
 export default {
+  merge(tags) {
+    tags = Object.values(merge(tags, this.get()))
+    this.save(tags)
+    return tags
+  },
   normalize() {
     return [
       {

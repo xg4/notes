@@ -7,6 +7,8 @@ export const PUT_NOTES_SORT = 'PUT_NOTES_SORT'
 // action
 export const APP_INIT = 'APP_INIT'
 
+export const UPLOAD_DATA = 'UPLOAD_DATA'
+
 export const DELETE_NOTE = 'DELETE_NOTE'
 
 export const DELETE_NOTES = 'DELETE_NOTES'

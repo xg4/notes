@@ -2,11 +2,21 @@ import nanoid from 'nanoid'
 import { STORE_USER_KEY } from '../config'
 
 export default {
+  merge(user) {
+    const savedUser = this.get()
+    if (user.update_at > savedUser.update_at) {
+      this.save(user)
+      return user
+    }
+    return savedUser
+  },
   normalize() {
     return {
       id: nanoid(),
       // 0: update_at 升序， 1: update_at 降序
-      sort: 0
+      sort: 0,
+      create_at: Date.now(),
+      update_at: Date.now()
     }
   },
   init() {

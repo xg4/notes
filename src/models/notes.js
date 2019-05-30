@@ -1,7 +1,13 @@
 import nanoid from 'nanoid'
 import { STORE_NOTES_KEY } from '../config'
+import { merge } from '../util'
 
 export default {
+  merge(notes) {
+    notes = Object.values(merge(notes, this.get()))
+    this.save(notes)
+    return notes
+  },
   normalize() {
     return [
       this.new({
