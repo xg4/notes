@@ -1,3 +1,48 @@
+.wrap {
+  background: #eee;
+  min-height: 100vh;
+}
+
+.user {
+  padding: 0 20px 30px;
+  margin-bottom: 10px;
+  display: flex;
+  background-color: #fff;
+
+  figcaption {
+    height: 40px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    flex: 1;
+    overflow: hidden;
+
+    p {
+      font-size: 12px;
+      &:nth-child(1) {
+        color: var(--fontColor);
+      }
+      &:nth-child(2) {
+        color: gray(70);
+      }
+    }
+  }
+}
+
+.avatar {
+  width: 40px;
+  height: 40px;
+  font-size: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-right: 10px;
+}
+
+.icon {
+  margin-right: 10px;
+}
+
 .copyright {
   padding: 30px 0;
   display: flex;

@@ -57,7 +57,6 @@ const router = new Router({
       path: '/profile',
       name: 'profile',
       meta: {
-        title: '我的',
         showNavbar: true,
         showTabbar: true
       },

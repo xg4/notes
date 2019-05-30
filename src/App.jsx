@@ -1,6 +1,5 @@
 import classNames from 'classnames'
 import styles from './App.module.less'
-import { TITLE } from './config'
 
 export default {
   created() {
@@ -13,7 +12,10 @@ export default {
   },
   computed: {
     title() {
-      return this.$route.meta.title || TITLE
+      return this.$route.meta.title
+    },
+    hasTitle() {
+      return !!this.title
     },
     showNavbar() {
       return this.$route.meta.showNavbar
@@ -107,6 +109,7 @@ export default {
           vShow={this.showNavbar}
           title={this.title}
           fixed
+          border={this.hasTitle}
           onClick-left={this.handleBack}
           onClick-right={this.toggleActionSheet}
           {...{
@@ -115,6 +118,7 @@ export default {
         >
           {this.hasActionSheet && <van-icon name="ellipsis" slot="right" />}
         </van-nav-bar>
+
         {this.hasActionSheet && (
           <van-action-sheet
             vModel={this.visibleSheet}
