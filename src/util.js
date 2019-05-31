@@ -65,6 +65,31 @@ export function download() {
   })
 }
 
+export function upload(file) {
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader()
+
+    reader.readAsText(file, 'UTF-8')
+
+    reader.onload = function(evt) {
+      try {
+        resolve(JSON.parse(evt.target.result))
+      } catch {
+        reject('读取文件错误，请重试')
+      }
+    }
+
+    reader.onerror = function() {
+      reject('读取文件错误，请重试')
+    }
+  })
+}
+
+export function isObj(value) {
+  const type = typeof value
+  return value != null && (type == 'object' || type == 'function')
+}
+
 /**
  * @description 严格模式：判断两个对象下的所有 key-value 是否相等
  *              松散模式：以 a 对象的keys 和 b 进行比对（b中可以多一些key）
@@ -117,24 +142,4 @@ export function merge(
       return store
     }, array2Object(source))
   )
-}
-
-export function upload(file) {
-  return new Promise((resolve, reject) => {
-    const reader = new FileReader()
-
-    reader.readAsText(file, 'UTF-8')
-
-    reader.onload = function(evt) {
-      try {
-        resolve(JSON.parse(evt.target.result))
-      } catch {
-        reject('读取文件错误，请重试')
-      }
-    }
-
-    reader.onerror = function() {
-      reject('读取文件错误，请重试')
-    }
-  })
 }

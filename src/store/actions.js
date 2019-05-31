@@ -1,6 +1,5 @@
-import { User } from '../models'
 import * as types from './types'
-import { Note, Tag } from '../service'
+import { Note, Tag, User } from '../service'
 
 export default {
   /**
@@ -9,7 +8,7 @@ export default {
   async [types.APP_INIT]({ commit }) {
     commit(types.PUT_NOTES, Note.find())
     commit(types.PUT_TAGS, await Tag.init())
-    commit(types.PUT_USER, User.init())
+    commit(types.PUT_USER, await User.init())
   },
   [types.UPLOAD_DATA]({ commit }, { notes, user, tags }) {
     commit(types.PUT_NOTES, Note.merge(notes))
@@ -38,8 +37,8 @@ export default {
   /**
    * @description update notes sort type
    */
-  [types.PUT_NOTES_SORT]({ commit }, type) {
-    commit(types.PUT_NOTES_SORT, User.putSort(type).sort)
+  async [types.PUT_NOTES_SORT]({ commit }, type) {
+    commit(types.PUT_NOTES_SORT, (await User.update({ sort: type })).sort)
   },
   async [types.DELETE_NOTE]({ commit }, id) {
     commit(types.PUT_NOTES, await Note.deleteById(id))
