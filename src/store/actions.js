@@ -1,14 +1,14 @@
-import { Tag, User } from '../models'
+import { User } from '../models'
 import * as types from './types'
-import { Note } from '../service'
+import { Note, Tag } from '../service'
 
 export default {
   /**
    * @description Initialize app data
    */
-  [types.APP_INIT]({ commit }) {
+  async [types.APP_INIT]({ commit }) {
     commit(types.PUT_NOTES, Note.find())
-    commit(types.PUT_TAGS, Tag.init())
+    commit(types.PUT_TAGS, await Tag.init())
     commit(types.PUT_USER, User.init())
   },
   [types.UPLOAD_DATA]({ commit }, { notes, user, tags }) {

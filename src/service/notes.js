@@ -30,9 +30,9 @@ export default class Note {
     return this.store.length
   }
 
-  static merge(notes) {
-    Note.store = merge(notes, Note.store)
-    return Note.store
+  static merge(data) {
+    this.store = merge(data, this.store)
+    return this.store
   }
 
   static find(query) {

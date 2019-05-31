@@ -20,6 +20,9 @@ export default {
     return getters.notes.filter(note => note.is_complete)
   },
   tags(state) {
-    return Object.values(state.tags)
+    return state.tags
+  },
+  getTagById(state) {
+    return id => state.tags.find(tag => tag.id === id)
   }
 }
