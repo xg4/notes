@@ -1,4 +1,3 @@
-import { Note, User, Tag } from './models'
 import dayjs from 'dayjs'
 
 export function formatDate(date, formatStr = 'YYYY-MM-DD HH:mm:ss') {
@@ -45,16 +44,10 @@ const triggerDownload = rawData => {
   URL.revokeObjectURL(url)
 }
 
-export function download() {
+export function download(rawData) {
   return new Promise((resolve, reject) => {
-    const backup = {
-      notes: Note.get(),
-      user: User.get(),
-      tags: Tag.get()
-    }
-
     try {
-      const data = new Blob([JSON.stringify(backup)], {
+      const data = new Blob([JSON.stringify(rawData)], {
         type: 'application/json'
       })
       triggerDownload(data)
@@ -63,25 +56,6 @@ export function download() {
       reject({ message: '请使用最新的Chrome浏览器进行下载' })
     }
   })
-}
-
-export function merge(target, source) {
-  source = source.reduce((store, item) => {
-    store[item.id] = item
-    return store
-  }, Object.create(null))
-
-  return target.reduce((store, item) => {
-    const current = store[item.id]
-    if (current) {
-      if (item.update_at > current.update_at) {
-        store[item.id] = item
-      }
-    } else {
-      store[item.id] = item
-    }
-    return store
-  }, source)
 }
 
 export function upload(file) {
@@ -102,4 +76,63 @@ export function upload(file) {
       reject('读取文件错误，请重试')
     }
   })
+}
+
+export function isObj(value) {
+  const type = typeof value
+  return value != null && (type == 'object' || type == 'function')
+}
+
+/**
+ * @description 严格模式：判断两个对象下的所有 key-value 是否相等
+ *              松散模式：以 a 对象的keys 和 b 进行比对（b中可以多一些key）
+ * @param {Object} a
+ * @param {Object} b
+ */
+export function equalObject(a, b, strict) {
+  const keys = Object.keys(a)
+  if (strict && keys.length !== Object.keys(b).length) {
+    return false
+  }
+  return keys.every(key => a[key] === b[key])
+}
+
+/**
+ * @description 将数组转换成指定 key 的对象，没有指定 key 时，用 index 代替
+ * @param {Object[]} arr
+ * @param {String} arrKey
+ */
+export function array2Object(arr, arrKey = 'id') {
+  return arr.reduce((acc, cur, index) => {
+    const key = cur[arrKey] || index
+    // TODO: deep clone
+    acc[key] = { ...cur }
+    return acc
+  }, Object.create(null))
+}
+
+/**
+ * @description 合并两个数组，并去重
+ * @param {Array} target
+ * @param {Array} source
+ * @param {Function} func
+ */
+export function merge(
+  target,
+  source,
+  func = (a, b) => a.update_at > b.update_at
+) {
+  return Object.values(
+    target.reduce((store, item) => {
+      const current = store[item.id]
+      if (current) {
+        if (func(item, current)) {
+          store[item.id] = item
+        }
+      } else {
+        store[item.id] = item
+      }
+      return store
+    }, array2Object(source))
+  )
 }

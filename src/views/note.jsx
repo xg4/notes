@@ -15,10 +15,10 @@ export default {
       return this.$route.params.id
     },
     hasNote() {
-      return !!this.$store.state.notes[this.id]
+      return !!this.$store.getters.getNoteById(this.id)
     },
     note() {
-      return this.$store.state.notes[this.id] || {}
+      return this.$store.getters.getNoteById(this.id) || {}
     }
   },
   methods: {

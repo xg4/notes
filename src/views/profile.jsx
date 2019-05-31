@@ -1,6 +1,6 @@
 import classNames from 'classnames'
 import styles from './profile.module.less'
-import { download, upload } from '../util'
+import { upload } from '../util'
 
 export default {
   methods: {
@@ -25,7 +25,8 @@ export default {
         .catch(() => {})
     },
     handleDownload() {
-      download()
+      this.$store
+        .dispatch('DOWNLOAD_DATA')
         .then(() => {})
         .catch(({ message }) => {
           this.$dialog({

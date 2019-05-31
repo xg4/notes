@@ -21,7 +21,7 @@ export default {
   },
   computed: {
     note() {
-      return this.$store.state.notes[this.activeID]
+      return this.$store.getters.getNoteById(this.activeID)
     },
     hasID() {
       return !!this.activeID
@@ -87,11 +87,13 @@ export default {
             vModel={this.title}
             label="标题"
             placeholder="请输入标题"
+            center
           />
           <van-field
             vModel={this.content}
             label="内容"
             placeholder="请输入内容"
+            center
             type="textarea"
             rows="1"
             autosize

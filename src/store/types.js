@@ -15,8 +15,9 @@ export const DELETE_NOTES = 'DELETE_NOTES'
 
 export const DELETE_COMPLETED_NOTES = 'DELETE_COMPLETED_NOTES'
 
-// mutation
+export const DOWNLOAD_DATA = 'DOWNLOAD_DATA'
 
+// mutation
 export const PUT_NOTES = 'PUT_NOTES'
 
 export const PUT_TAGS = 'PUT_TAGS'

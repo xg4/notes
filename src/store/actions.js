@@ -1,14 +1,15 @@
-import { Tag, Note, User } from '../models'
 import * as types from './types'
+import { Note, Tag, User } from '../models'
+import { download } from '../util'
 
 export default {
   /**
    * @description Initialize app data
    */
-  [types.APP_INIT]({ commit }) {
-    commit(types.PUT_NOTES, Note.init())
-    commit(types.PUT_TAGS, Tag.init())
-    commit(types.PUT_USER, User.init())
+  async [types.APP_INIT]({ commit }) {
+    commit(types.PUT_NOTES, Note.find())
+    commit(types.PUT_TAGS, await Tag.init())
+    commit(types.PUT_USER, await User.init())
   },
   [types.UPLOAD_DATA]({ commit }, { notes, user, tags }) {
     commit(types.PUT_NOTES, Note.merge(notes))
@@ -18,27 +19,30 @@ export default {
   /**
    * @description update note data by id
    */
-  [types.PUT_NOTE]({ commit }, partialNote) {
-    commit(types.PUT_NOTE, Note.put(partialNote))
+  async [types.PUT_NOTE]({ commit }, { id, ...partialNote }) {
+    commit(types.PUT_NOTE, await Note.findByIdAndUpdate(id, partialNote))
   },
   /**
    * @description create note
    */
   [types.POST_NOTE]({ commit }, partialNote) {
-    return new Promise(resolve => {
-      const note = Note.post(partialNote)
-      commit(types.POST_NOTE, note)
-      resolve(note)
+    return new Promise((resolve, reject) => {
+      Note.create(partialNote)
+        .then(note => {
+          commit(types.POST_NOTE, note)
+          resolve(note)
+        })
+        .catch(reject)
     })
   },
   /**
    * @description update notes sort type
    */
-  [types.PUT_NOTES_SORT]({ commit }, type) {
-    commit(types.PUT_NOTES_SORT, User.putSort(type).sort)
+  async [types.PUT_NOTES_SORT]({ commit }, type) {
+    commit(types.PUT_NOTES_SORT, (await User.update({ sort: type })).sort)
   },
-  [types.DELETE_NOTE]({ commit }, id) {
-    commit(types.PUT_NOTES, Note.deleteById(id))
+  async [types.DELETE_NOTE]({ commit }, id) {
+    commit(types.PUT_NOTES, await Note.deleteById(id))
   },
   /**
    * @description delete all notes
@@ -50,6 +54,13 @@ export default {
    * @description delete completed notes
    */
   [types.DELETE_COMPLETED_NOTES]({ commit }) {
-    commit(types.PUT_NOTES, Note.deleteCompleted())
+    commit(types.PUT_NOTES, Note.delete({ is_complete: true }))
+  },
+  [types.DOWNLOAD_DATA]() {
+    return download({
+      notes: Note.find(),
+      user: User.get(),
+      tags: Tag.find()
+    })
   }
 }
