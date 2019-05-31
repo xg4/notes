@@ -1,5 +1,6 @@
 import * as types from './types'
-import { Note, Tag, User } from '../service'
+import { Note, Tag, User } from '../models'
+import { download } from '../util'
 
 export default {
   /**
@@ -54,5 +55,12 @@ export default {
    */
   [types.DELETE_COMPLETED_NOTES]({ commit }) {
     commit(types.PUT_NOTES, Note.delete({ is_complete: true }))
+  },
+  [types.DOWNLOAD_DATA]() {
+    return download({
+      notes: Note.find(),
+      user: User.get(),
+      tags: Tag.find()
+    })
   }
 }

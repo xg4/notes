@@ -1,4 +1,3 @@
-import { Note, User, Tag } from './models'
 import dayjs from 'dayjs'
 
 export function formatDate(date, formatStr = 'YYYY-MM-DD HH:mm:ss') {
@@ -45,16 +44,10 @@ const triggerDownload = rawData => {
   URL.revokeObjectURL(url)
 }
 
-export function download() {
+export function download(rawData) {
   return new Promise((resolve, reject) => {
-    const backup = {
-      notes: Note.get(),
-      user: User.get(),
-      tags: Tag.get()
-    }
-
     try {
-      const data = new Blob([JSON.stringify(backup)], {
+      const data = new Blob([JSON.stringify(rawData)], {
         type: 'application/json'
       })
       triggerDownload(data)

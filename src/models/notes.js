@@ -1,103 +1,120 @@
 import nanoid from 'nanoid'
 import { STORE_NOTES_KEY } from '../config'
-import { merge } from '../util'
+import { merge, equalObject, array2Object } from '../util'
 
-export default {
-  merge(notes) {
-    notes = Object.values(merge(notes, this.get()))
-    this.save(notes)
-    return notes
-  },
-  normalize() {
-    return [
-      this.new({
-        title: '欢迎使用备忘录',
-        content: '在这里记录一些事情吧'
+let store
+
+try {
+  store = JSON.parse(localStorage.getItem(STORE_NOTES_KEY)) || []
+} catch {
+  store = []
+}
+
+export default class Note {
+  static _store = store
+
+  static get store() {
+    return this._store
+  }
+
+  static set store(data) {
+    localStorage.setItem(STORE_NOTES_KEY, JSON.stringify(data))
+    this._store = data
+  }
+
+  static create(data) {
+    return new this(data).save()
+  }
+
+  static count() {
+    return this.store.length
+  }
+
+  static merge(data) {
+    this.store = merge(data, this.store)
+    return this.store
+  }
+
+  static find(query) {
+    if (!query) {
+      return this.store
+    }
+    return this.store
+      .map(item => {
+        if (equalObject(query, item)) {
+          return item
+        }
       })
-    ]
-  },
-  /**
-   * @description generate a note data
-   */
-  new({ title, content, tag, is_collect = false, is_complete = false }) {
-    return {
-      id: nanoid(),
-      title,
-      content,
-      tag,
-      is_collect,
-      is_complete,
-      create_at: Date.now(),
-      update_at: Date.now()
-    }
-  },
-  /**
-   * @description transform raw data to use
-   * @param {*} notes
-   */
-  //////
-  transform(notes) {
-    return notes.reduce((store, note) => {
-      store[note.id] = note
-      return store
-    }, {})
-  },
-  init() {
-    let notes = this.get()
-    if (!notes || !notes.length) {
-      notes = this.normalize()
-      this.save(notes)
-    }
-    return this.transform(notes)
-  },
-  ///////
-  get() {
-    return JSON.parse(localStorage.getItem(STORE_NOTES_KEY) || null) || []
-  },
-  /////////////
-  getById(id) {
-    return this.get().find(note => note.id === id) || {}
-  },
-  //////
-  post(partialNote) {
-    const note = this.new(partialNote)
-    const notes = this.get() || []
-    notes.push(note)
-    this.save(notes)
-    return note
-  },
-  //////
-  put(partialNote) {
-    if (!partialNote.id) {
-      return
-    }
-    const notes = this.get()
-    let note
-    notes.some((n, index, notes) => {
-      if (n.id === partialNote.id) {
-        note = { ...n, ...partialNote }
-        notes.splice(index, 1, note)
-        return true
+      .filter(Boolean)
+  }
+
+  static findById(id) {
+    const target = this.store.find(item => item.id === id)
+    return target ? new this(target) : null
+  }
+
+  static findByIdAndUpdate(id, update) {
+    const target = this.store.find(item => item.id === id)
+    return target
+      ? this.create({ ...target, ...update, update_at: Date.now() })
+      : Promise.reject()
+  }
+
+  static deleteById(id) {
+    return new Promise((resolve, reject) => {
+      const target = this.store.find(item => item.id === id)
+      if (!target) {
+        reject({ message: '没有找到该条备忘录' })
+      } else {
+        resolve(new this(target).delete())
       }
     })
-    this.save(notes)
-    return note
-  },
+  }
+
+  static delete(query) {
+    if (!query) {
+      this.store = []
+    } else {
+      this.store.forEach(item => {
+        if (equalObject(query, item)) {
+          new this(item).delete()
+        }
+      })
+    }
+    return this.store
+  }
+
+  constructor({
+    id = nanoid(),
+    title = '',
+    content = '',
+    is_collect = false,
+    is_complete = false,
+    create_at = Date.now(),
+    update_at = Date.now()
+  }) {
+    this.id = id
+    this.title = title
+    this.content = content
+    this.is_collect = is_collect
+    this.is_complete = is_complete
+    this.create_at = create_at
+    this.update_at = update_at
+  }
+
   delete() {
-    this.save([])
-    return this.transform([])
-  },
-  deleteById(id) {
-    const notes = this.get().filter(note => note.id !== id)
-    this.save(notes)
-    return this.transform(notes)
-  },
-  deleteCompleted() {
-    const notes = this.get().filter(note => !note.is_complete)
-    this.save(notes)
-    return this.transform(notes)
-  },
-  save(notes) {
-    return localStorage.setItem(STORE_NOTES_KEY, JSON.stringify(notes))
+    const clonedObj = array2Object(Note.store)
+    delete clonedObj[this.id]
+    Note.store = Object.values(clonedObj)
+    return Note.store
+  }
+
+  save() {
+    return new Promise(resolve => {
+      const clonedObj = array2Object(Note.store)
+      clonedObj[this.id] = this
+      Note.store = Object.values(clonedObj)
+      resolve(this)
+    })
   }
 }
