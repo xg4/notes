@@ -8,20 +8,20 @@ self.__precacheManifest = [
     "url": "js/404.34f99d3f.js"
   },
   {
-    "revision": "2a676f057764a574cbb3",
+    "revision": "38cc3f3b1922fa0ab876",
     "url": "css/app.157df666.css"
   },
   {
-    "revision": "2a676f057764a574cbb3",
-    "url": "js/app.b8eebb8c.js"
+    "revision": "38cc3f3b1922fa0ab876",
+    "url": "js/app.f571fc86.js"
   },
   {
-    "revision": "32ec9e917196152d10ff",
-    "url": "css/avatar.1e0b34db.css"
+    "revision": "b82f450c5b0030044ac2",
+    "url": "css/avatar.d09f6bb8.css"
   },
   {
-    "revision": "32ec9e917196152d10ff",
-    "url": "js/avatar.991467d2.js"
+    "revision": "b82f450c5b0030044ac2",
+    "url": "js/avatar.0e3f31c7.js"
   },
   {
     "revision": "d3a82e21f399463986d1",
@@ -32,6 +32,14 @@ self.__precacheManifest = [
     "url": "js/chunk-vendors.b396bc03.js"
   },
   {
+    "revision": "658a90073324e81e7def",
+    "url": "css/name.1b00e97a.css"
+  },
+  {
+    "revision": "658a90073324e81e7def",
+    "url": "js/name.0c727dae.js"
+  },
+  {
     "revision": "347e1d6f8b29cbd3795d",
     "url": "css/new.1dc44791.css"
   },
@@ -40,11 +48,11 @@ self.__precacheManifest = [
     "url": "js/new.d8706a0b.js"
   },
   {
-    "revision": "5fcb0f428b71382f93b4",
-    "url": "css/note.6a40cbf0.css"
+    "revision": "c9cd6fbbec969468d188",
+    "url": "css/note.8479343c.css"
   },
   {
-    "revision": "5fcb0f428b71382f93b4",
+    "revision": "c9cd6fbbec969468d188",
     "url": "js/note.35b2c709.js"
   },
   {
@@ -56,15 +64,23 @@ self.__precacheManifest = [
     "url": "js/notes.995bab93.js"
   },
   {
-    "revision": "a4f6ccbddd5fcdafbe56",
-    "url": "css/profile.380cd7b3.css"
+    "revision": "d17ef0d713348682a4bf",
+    "url": "css/profile.5ffc460b.css"
   },
   {
-    "revision": "a4f6ccbddd5fcdafbe56",
-    "url": "js/profile.d5fd7337.js"
+    "revision": "d17ef0d713348682a4bf",
+    "url": "js/profile.1bc3d477.js"
   },
   {
-    "revision": "ec39cd9c973b27c11906ab70bb3733fc",
+    "revision": "379040463af6140f064a",
+    "url": "css/settings.959dbd85.css"
+  },
+  {
+    "revision": "379040463af6140f064a",
+    "url": "js/settings.c03b5216.js"
+  },
+  {
+    "revision": "6983bb204d2a7d872c710001086ae37b",
     "url": "index.html"
   },
   {
