@@ -53,14 +53,14 @@ export default {
             </p>
           </div>
         </div>
-        <van-cell-group>
-          <van-cell title="导出数据" is-link onClick={this.handleDownload}>
+        <van-cell-group class={styles.group}>
+          <van-cell title="导出数据" isLink onClick={this.handleDownload}>
             <i
               class={classNames(styles.icon, 'x-icon x-icon-download')}
               slot="icon"
             />
           </van-cell>
-          <van-cell title="导入数据" is-link onClick={this.handleUpload}>
+          <van-cell title="导入数据" isLink onClick={this.handleUpload}>
             <i
               class={classNames(styles.icon, 'x-icon x-icon-upload')}
               slot="icon"
@@ -70,6 +70,19 @@ export default {
               ref="file"
               type="file"
               onChange={this.uploadFile}
+            />
+          </van-cell>
+        </van-cell-group>
+
+        <van-cell-group>
+          <van-cell
+            title="反馈"
+            isLink
+            url="https://github.com/xg4/notes/issues"
+          >
+            <i
+              class={classNames(styles.icon, 'x-icon x-icon-bug')}
+              slot="icon"
             />
           </van-cell>
         </van-cell-group>
