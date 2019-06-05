@@ -7,7 +7,7 @@
 
 ## Contributing
 
-Any
+Welcome
 
 - Fork it
 
