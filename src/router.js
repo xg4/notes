@@ -64,6 +64,12 @@ const router = new Router({
         import(/* webpackChunkName: "profile" */ './views/profile')
     },
     {
+      path: '/settings/avatar',
+      name: 'avatar',
+      meta: {},
+      component: () => import(/* webpackChunkName: "avatar" */ './views/avatar')
+    },
+    {
       path: '/note/:id',
       name: 'note',
       meta: {

@@ -1,5 +1,7 @@
 import dayjs from 'dayjs'
 
+export { default as Avatar } from './avatar'
+
 export function formatDate(date, formatStr = 'YYYY-MM-DD HH:mm:ss') {
   return dayjs(date).format(formatStr)
 }

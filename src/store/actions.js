@@ -1,6 +1,6 @@
 import * as types from './types'
 import { Note, Tag, User } from '../models'
-import { download } from '../util'
+import { download } from '../utils'
 
 export default {
   /**
@@ -62,5 +62,8 @@ export default {
       user: User.get(),
       tags: Tag.find()
     })
+  },
+  async [types.UPDATE_USER]({ commit }, user) {
+    commit(types.UPDATE_USER, await User.update(user))
   }
 }

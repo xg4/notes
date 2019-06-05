@@ -1,6 +1,6 @@
 import nanoid from 'nanoid'
 import { STORE_NOTES_KEY } from '../config'
-import { merge, equalObject, array2Object } from '../util'
+import { merge, equalObject, array2Object } from '../utils'
 
 let store
 

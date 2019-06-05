@@ -23,9 +23,11 @@ import {
   TabbarItem,
   Tab,
   Tabs,
-  Icon
+  Icon,
+  Notify
 } from 'vant'
 ;[
+  Notify,
   Popup,
   Picker,
   Dialog,
