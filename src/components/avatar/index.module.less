@@ -1,10 +1,19 @@
 .avatar {
   width: 100px;
   height: 100px;
+  display: inline-block;
   position: relative;
 
   border-radius: 50%;
   overflow: hidden;
+
+  &.mini {
+    width: 24px;
+    height: 24px;
+    .icon {
+      font-size: 12px;
+    }
+  }
 
   &.sm {
     width: 40px;

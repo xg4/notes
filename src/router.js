@@ -64,10 +64,27 @@ const router = new Router({
         import(/* webpackChunkName: "profile" */ './views/profile')
     },
     {
+      path: '/settings',
+      name: 'settings',
+      meta: {
+        showNavbar: true
+      },
+      component: () =>
+        import(/* webpackChunkName: "settings" */ './views/settings')
+    },
+    {
       path: '/settings/avatar',
       name: 'avatar',
       meta: {},
-      component: () => import(/* webpackChunkName: "avatar" */ './views/avatar')
+      component: () =>
+        import(/* webpackChunkName: "avatar" */ './views/settings/avatar')
+    },
+    {
+      path: '/settings/name',
+      name: 'name',
+      meta: {},
+      component: () =>
+        import(/* webpackChunkName: "name" */ './views/settings/name')
     },
     {
       path: '/note/:id',

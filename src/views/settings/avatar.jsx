@@ -1,6 +1,6 @@
 import styles from './avatar.module.less'
-import Avatar from '../components/avatar'
-import { Avatar as Ava } from '../utils'
+import Avatar from '../../components/avatar'
+import { Avatar as Ava } from '../../utils'
 
 const { THEME_MAP } = Ava
 
@@ -55,7 +55,7 @@ export default {
     handleSubmit() {
       this.$store.dispatch('UPDATE_USER', { avatar: this.url })
       this.$notify({
-        message: '保存成功',
+        message: '修改成功',
         duration: 1500,
         background: '#1989fa'
       })

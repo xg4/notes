@@ -17,7 +17,7 @@ export default {
       this.$dialog
         .confirm({
           title: '数据同步',
-          message: '您确定要同步上传数据？\n备忘录将根据最后的更新时间进行合并'
+          message: '您确定要同步上传数据？\n将根据最后的更新时间进行合并'
         })
         .then(() => {
           // FIXME: hide dialog
@@ -40,19 +40,19 @@ export default {
   render() {
     return (
       <div class={styles.wrap}>
-        <div class={styles.user}>
-          <router-link class={styles.avatar} to="/settings/avatar">
+        <router-link to="/settings" class={styles.user}>
+          <div class={styles.avatar}>
             <Avatar size="sm" />
-          </router-link>
+          </div>
 
           <div class={styles.info}>
-            <p>{this.$store.state.user.name || '用户名'}</p>
-            <p class="ellipsis">
+            <b class={styles.name}>{this.$store.state.user.name}</b>
+            <p class={classNames(styles.id, 'ellipsis')}>
               id:
               {this.$store.state.user.id}
             </p>
           </div>
-        </div>
+        </router-link>
         <van-cell-group class={styles.group}>
           <van-cell title="导出数据" isLink onClick={this.handleDownload}>
             <i

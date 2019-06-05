@@ -55,6 +55,7 @@ export default class User {
     return {
       id: nanoid(),
       avatar: '',
+      name: '',
       sort: 0,
       create_at: Date.now(),
       update_at: Date.now()
@@ -62,7 +63,7 @@ export default class User {
   }
 
   constructor(options) {
-    const { id, sort, create_at, update_at, avatar } = {
+    const { id, sort, create_at, update_at, avatar, name } = {
       ...User.defaultOptions,
       ...options
     }
@@ -72,6 +73,7 @@ export default class User {
     this.avatar = avatar
     this.create_at = create_at
     this.update_at = update_at
+    this.name = name
   }
 
   save() {
