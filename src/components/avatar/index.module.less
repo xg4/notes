@@ -1,15 +1,26 @@
 .avatar {
+  width: 100px;
+  height: 100px;
+  position: relative;
+
   border-radius: 50%;
-  transition: background-color 0.3s ease-in-out;
-  background-color: transparent;
+  overflow: hidden;
+
+  &.sm {
+    width: 40px;
+    height: 40px;
+    .icon {
+      font-size: 14px;
+    }
+  }
 
   &.lg {
     width: 150px;
     height: 150px;
-  }
 
-  &.mask {
-    background-color: #eee;
+    .icon {
+      font-size: 40px;
+    }
   }
 
   img {
@@ -17,4 +28,22 @@
     height: 100%;
     object-fit: contain;
   }
+}
+
+.loading,
+.error {
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  background-color: #f8f8f8;
+}
+
+.icon {
+  font-size: 25px;
+  color: #969799;
 }

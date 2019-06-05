@@ -2,19 +2,6 @@ import dayjs from 'dayjs'
 
 export { default as Avatar } from './avatar'
 
-export function loadImage(url) {
-  return new Promise((resolve, reject) => {
-    const image = new Image()
-    image.onload = () => {
-      resolve(image)
-    }
-
-    image.onerror = reject
-
-    image.src = url
-  })
-}
-
 export function formatDate(date, formatStr = 'YYYY-MM-DD HH:mm:ss') {
   return dayjs(date).format(formatStr)
 }

@@ -8,6 +8,7 @@ export default class Avatar {
   }
 
   constructor(url) {
+    url = url || 'https://avataaars.io'
     this.url = new URL(url)
     this.searchParams = this.url.searchParams
   }

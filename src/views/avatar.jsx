@@ -66,7 +66,7 @@ export default {
     return (
       <div class={styles.wrap}>
         <div class={styles.avatar}>
-          <Avatar src={this.url || this.$store.state.user.avatar} />
+          <Avatar size="lg" src={this.url || this.$store.state.user.avatar} />
         </div>
 
         <van-cell-group class={styles.form}>

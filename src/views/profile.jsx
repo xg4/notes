@@ -1,6 +1,7 @@
 import classNames from 'classnames'
 import styles from './profile.module.less'
 import { upload } from '../utils'
+import Avatar from '../components/avatar'
 
 export default {
   methods: {
@@ -41,11 +42,7 @@ export default {
       <div class={styles.wrap}>
         <div class={styles.user}>
           <router-link class={styles.avatar} to="/settings/avatar">
-            {this.$store.state.user.avatar ? (
-              <img src={this.$store.state.user.avatar} alt="avatar" />
-            ) : (
-              <i class={classNames('x-icon x-icon-avatar')} />
-            )}
+            <Avatar size="sm" />
           </router-link>
 
           <div class={styles.info}>

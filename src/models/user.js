@@ -54,6 +54,7 @@ export default class User {
   static get defaultOptions() {
     return {
       id: nanoid(),
+      avatar: '',
       sort: 0,
       create_at: Date.now(),
       update_at: Date.now()

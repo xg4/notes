@@ -1,44 +1,65 @@
 import classNames from 'classnames'
-import { loadImage } from '../../utils'
 import styles from './index.module.less'
 
 export default {
   props: {
-    src: String
+    src: String,
+    size: String
   },
   data() {
     return {
-      avatar: {}
+      loading: true,
+      error: false
     }
   },
   watch: {
-    src: {
-      handler() {
-        this.avatar = {}
-        this.loadImage()
-      },
-      immediate: true
+    src() {
+      this.loading = true
+      this.error = false
     }
   },
   computed: {
-    isLoaded() {
-      return !!this.avatar.src
+    url() {
+      return this.src || this.$store.state.user.avatar
     }
   },
   methods: {
-    async loadImage() {
-      this.avatar = await loadImage(this.src)
+    onLoad() {
+      this.loading = false
+    },
+    onError() {
+      this.loading = false
+      this.error = true
+    },
+    renderPlaceholder() {
+      if (this.loading) {
+        return (
+          <div class={styles.loading}>
+            <i class={classNames('x-icon x-icon-img', styles.icon)} />
+          </div>
+        )
+      }
+
+      if (this.error) {
+        return (
+          <div class={styles.error}>
+            <i class={classNames('x-icon x-icon-img-fail', styles.icon)} />
+          </div>
+        )
+      }
     }
   },
   render() {
     return (
-      <div
-        class={classNames(styles.avatar, styles.lg, {
-          [styles.mask]: !this.isLoaded
-        })}
-      >
+      <div class={classNames(styles.avatar, styles[this.size])}>
+        {this.renderPlaceholder()}
         <transition name="animate-fade">
-          <img vShow={this.isLoaded} src={this.avatar.src} alt="avatar" />
+          <img
+            vShow={!this.error}
+            src={this.url}
+            onLoad={this.onLoad}
+            onError={this.onError}
+          />
         </transition>
       </div>
     )
