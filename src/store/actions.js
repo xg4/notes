@@ -1,6 +1,6 @@
 import * as types from './types'
 import { Note, Tag, User } from '../models'
-import { download } from '../util'
+import { download } from '../utils'
 
 export default {
   /**

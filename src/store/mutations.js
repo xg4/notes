@@ -1,5 +1,5 @@
 import * as types from './types'
-import { array2Object } from '../util'
+import { array2Object } from '../utils'
 
 export default {
   [types.PUT_NOTE](state, note) {

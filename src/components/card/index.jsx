@@ -1,6 +1,6 @@
 import classNames from 'classnames'
 import styles from './index.module.less'
-import { formatDate } from '../../util'
+import { formatDate } from '../../utils'
 import Collect from '../collect'
 import Complete from '../complete'
 import Tag from '../tag'

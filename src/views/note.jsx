@@ -1,5 +1,5 @@
 import styles from './note.module.less'
-import { formatDate } from '../util'
+import { formatDate } from '../utils'
 import Collect from '../components/collect'
 import Complete from '../components/complete'
 import Tag from '../components/tag'

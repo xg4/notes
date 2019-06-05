@@ -1,6 +1,6 @@
 import classNames from 'classnames'
 import styles from './profile.module.less'
-import { upload } from '../util'
+import { upload } from '../utils'
 
 export default {
   methods: {
@@ -39,16 +39,19 @@ export default {
   render() {
     return (
       <div class={styles.wrap}>
-        <figure class={styles.user}>
-          <i class={classNames('x-icon x-icon-avatar', styles.avatar)} />
-          <figcaption>
+        <div class={styles.user}>
+          <router-link class={styles.avatar} to="/settings/avatar">
+            <i class={classNames('x-icon x-icon-avatar')} />
+          </router-link>
+
+          <div class={styles.info}>
             <p>{this.$store.state.user.name || '用户名'}</p>
             <p class="ellipsis">
               id:
               {this.$store.state.user.id}
             </p>
-          </figcaption>
-        </figure>
+          </div>
+        </div>
         <van-cell-group>
           <van-cell title="导出数据" is-link onClick={this.handleDownload}>
             <i
