@@ -1,5 +1,7 @@
 import dayjs from 'dayjs'
 
+export { default as Avatar } from './avatar'
+
 export function loadImage(url) {
   return new Promise((resolve, reject) => {
     const image = new Image()

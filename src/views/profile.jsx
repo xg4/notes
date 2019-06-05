@@ -41,7 +41,11 @@ export default {
       <div class={styles.wrap}>
         <div class={styles.user}>
           <router-link class={styles.avatar} to="/settings/avatar">
-            <i class={classNames('x-icon x-icon-avatar')} />
+            {this.$store.state.user.avatar ? (
+              <img src={this.$store.state.user.avatar} alt="avatar" />
+            ) : (
+              <i class={classNames('x-icon x-icon-avatar')} />
+            )}
           </router-link>
 
           <div class={styles.info}>

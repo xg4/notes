@@ -4,6 +4,8 @@ export const POST_NOTE = 'POST_NOTE'
 
 export const PUT_NOTES_SORT = 'PUT_NOTES_SORT'
 
+export const UPDATE_USER = 'UPDATE_USER'
+
 // action
 export const APP_INIT = 'APP_INIT'
 

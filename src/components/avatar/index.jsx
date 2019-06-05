@@ -6,9 +6,6 @@ export default {
   props: {
     src: String
   },
-  created() {
-    console.log('created')
-  },
   data() {
     return {
       avatar: {}

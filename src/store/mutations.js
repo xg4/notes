@@ -2,6 +2,9 @@ import * as types from './types'
 import { array2Object } from '../utils'
 
 export default {
+  [types.UPDATE_USER](state, user) {
+    state.user = { ...state.user, ...user }
+  },
   [types.PUT_NOTE](state, note) {
     const clonedObj = array2Object(state.notes)
     clonedObj[note.id] = note

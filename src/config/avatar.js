@@ -114,6 +114,26 @@ export const THEME_MAP = {
       { text: 'ShirtVNeck', value: 'ShirtVNeck' }
     ]
   },
+  clotheColor: {
+    title: '衣服颜色',
+    data: [
+      { text: 'Black', value: 'Black' },
+      { text: 'Blue01', value: 'Blue01' },
+      { text: 'Blue02', value: 'Blue02' },
+      { text: 'Blue03', value: 'Blue03' },
+      { text: 'Gray01', value: 'Gray01' },
+      { text: 'Gray02', value: 'Gray02' },
+      { text: 'Heather', value: 'Heather' },
+      { text: 'PastelBlue', value: 'PastelBlue' },
+      { text: 'PastelGreen', value: 'PastelGreen' },
+      { text: 'PastelOrange', value: 'PastelOrange' },
+      { text: 'PastelRed', value: 'PastelRed' },
+      { text: 'PastelYellow', value: 'PastelYellow' },
+      { text: 'Pink', value: 'Pink' },
+      { text: 'Red', value: 'Red' },
+      { text: 'White', value: 'White' }
+    ]
+  },
   eyeType: {
     title: '眼睛',
     data: [

@@ -1,29 +1,29 @@
-import qs from 'qs'
 import styles from './avatar.module.less'
 import Avatar from '../components/avatar'
-import { THEME_MAP } from '../config'
+import { Avatar as Ava } from '../utils'
+
+const { THEME_MAP } = Ava
 
 export default {
   created() {
-    const query = qs.parse(
-      'avatarStyle=Circle&topType=LongHairStraight&accessoriesType=Blank&hairColor=BrownDark&facialHairType=Blank&clotheType=BlazerShirt&eyeType=Default&eyebrowType=Default&mouthType=Default&skinColor=Light'
-    )
-
-    this.theme = Object.fromEntries(
-      Object.entries(query).map(([key, value]) => [
-        key,
-        THEME_MAP[key].data.find(item => item.value === value)
-      ])
-    )
+    this.ava = new Ava(this.$store.state.user.avatar)
+    this.theme = this.ava.formatByQuery()
   },
   data() {
     return {
       showPicker: false,
       active: null,
       activeIndex: 0,
+      ava: {},
       theme: {},
-      url:
-        'https://avataaars.io/?avatarStyle=Circle&topType=LongHairStraight&accessoriesType=Blank&hairColor=BrownDark&facialHairType=Blank&clotheType=BlazerShirt&eyeType=Default&eyebrowType=Default&mouthType=Default&skinColor=Light'
+      url: ''
+    }
+  },
+  watch: {
+    showPicker(newVal) {
+      if (!newVal) {
+        this.$refs.picker.setColumnIndex(0, this.activeIndex)
+      }
     }
   },
   computed: {
@@ -36,27 +36,37 @@ export default {
     handleToggle(type) {
       this.active = type
       this.activeIndex = this.list.findIndex(
-        ({ value }) => value === this.theme[this.active].value
+        ({ value }) =>
+          this.theme[this.active] && value === this.theme[this.active].value
       )
-      console.log(this.activeIndex)
       this.showPicker = !this.showPicker
     },
     handleConfirm(item) {
       this.theme[this.active] = item
-      const data = Object.fromEntries(
-        Object.entries(this.theme).map(([key, data]) => [key, data.value])
-      )
-      this.url = 'https://avataaars.io/?' + qs.stringify(data)
-      console.log(this.url)
+      this.url = this.ava.create(this.theme)
       this.showPicker = false
     },
-    handleCancel() {}
+    handleCancel() {
+      this.showPicker = false
+    },
+    handleBack() {
+      this.$router.back()
+    },
+    handleSubmit() {
+      this.$store.dispatch('UPDATE_USER', { avatar: this.url })
+      this.$notify({
+        message: '保存成功',
+        duration: 1500,
+        background: '#1989fa'
+      })
+      this.$router.back()
+    }
   },
   render() {
     return (
       <div class={styles.wrap}>
         <div class={styles.avatar}>
-          <Avatar src={this.url} />
+          <Avatar src={this.url || this.$store.state.user.avatar} />
         </div>
 
         <van-cell-group class={styles.form}>
@@ -75,6 +85,7 @@ export default {
 
         <van-popup vModel={this.showPicker} position="bottom">
           <van-picker
+            ref="picker"
             showToolbar
             defaultIndex={this.activeIndex}
             columns={this.list}
@@ -84,10 +95,15 @@ export default {
         </van-popup>
 
         <div class={styles.group}>
-          <van-button class={styles.btn} type="info" size="large">
+          <van-button
+            onClick={this.handleSubmit}
+            class={styles.btn}
+            type="info"
+            size="large"
+          >
             保存
           </van-button>
-          <van-button class={styles.btn} size="large">
+          <van-button onClick={this.handleBack} class={styles.btn} size="large">
             取消
           </van-button>
         </div>

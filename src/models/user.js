@@ -61,13 +61,14 @@ export default class User {
   }
 
   constructor(options) {
-    const { id, sort, create_at, update_at } = {
+    const { id, sort, create_at, update_at, avatar } = {
       ...User.defaultOptions,
       ...options
     }
 
     this.id = id
     this.sort = sort
+    this.avatar = avatar
     this.create_at = create_at
     this.update_at = update_at
   }
