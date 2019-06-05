@@ -19,7 +19,17 @@ export default {
       showTags: false
     }
   },
+  watch: {
+    showTags(newVal) {
+      if (!newVal) {
+        this.$refs.picker.setColumnIndex(0, this.activeIndex)
+      }
+    }
+  },
   computed: {
+    activeIndex() {
+      return this.tags.findIndex(tag => tag.id === this.tag)
+    },
     note() {
       return this.$store.getters.getNoteById(this.activeID)
     },
@@ -75,7 +85,6 @@ export default {
       this.showTags = false
     },
     cancelTag() {
-      // TODO: restore picked index
       this.showTags = false
     }
   },
@@ -122,8 +131,9 @@ export default {
 
         <van-popup vModel={this.showTags} position="bottom">
           <van-picker
+            ref="picker"
             showToolbar
-            defaultIndex={this.tags.findIndex(tag => tag.id === this.tag)}
+            defaultIndex={this.activeIndex}
             columns={this.tags}
             onConfirm={this.confirmTag}
             onCancel={this.cancelTag}
