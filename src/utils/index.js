@@ -34,25 +34,27 @@ formatDate.friendly = date => {
     : '刚刚'
 }
 
-const triggerDownload = rawData => {
+export const sleep = ms => new Promise(resolve => setTimeout(resolve, ms))
+
+const triggerDownload = (rawData, name = 'notes.json') => {
   const url = URL.createObjectURL(rawData)
   const a = document.createElement('a')
+  a.download = name
   a.href = url
-  a.download = 'notes.json'
   a.style.display = 'none'
-  document.body.appendChild(a)
+  document.body.append(a)
   a.click()
-  document.body.removeChild(a)
+  a.remove()
   URL.revokeObjectURL(url)
 }
 
-export function download(rawData) {
+export function download(data) {
   return new Promise((resolve, reject) => {
     try {
-      const data = new Blob([JSON.stringify(rawData)], {
+      const rawData = new Blob([JSON.stringify(data)], {
         type: 'application/json'
       })
-      triggerDownload(data)
+      triggerDownload(rawData)
       resolve()
     } catch (err) {
       reject({ message: '请使用最新的Chrome浏览器进行下载' })
