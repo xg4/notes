@@ -20,21 +20,29 @@ export default {
           message: '您确定要同步上传数据？\n将根据最后的更新时间进行合并'
         })
         .then(() => {
-          // FIXME: hide dialog
           this.$refs.file.click()
+          this.$dialog.close()
         })
         .catch(() => {})
     },
     handleDownload() {
-      this.$store
-        .dispatch('DOWNLOAD_DATA')
-        .then(() => {})
-        .catch(({ message }) => {
-          this.$dialog({
-            title: '下载失败',
-            message
-          })
+      this.$dialog
+        .confirm({
+          title: '导出数据',
+          message: '请您在PC浏览器上进行操作\n手机端暂不支持导出'
         })
+        .then(() => {
+          this.$store
+            .dispatch('DOWNLOAD_DATA')
+            .then(() => {})
+            .catch(({ message }) => {
+              this.$dialog({
+                title: '下载失败',
+                message
+              })
+            })
+        })
+        .catch(() => {})
     }
   },
   render() {
