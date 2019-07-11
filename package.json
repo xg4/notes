@@ -35,6 +35,7 @@
     ]
   },
   "dependencies": {
+    "@xg4/device": "^0.3.2",
     "classnames": "^2.2.6",
     "core-js": "^2.6.5",
     "dayjs": "^1.8.14",

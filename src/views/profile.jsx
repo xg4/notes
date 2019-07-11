@@ -1,6 +1,6 @@
 import classNames from 'classnames'
 import styles from './profile.module.less'
-import { upload } from '../utils'
+import { upload, device } from '../utils'
 import Avatar from '../components/avatar'
 
 export default {
@@ -29,7 +29,9 @@ export default {
       this.$dialog
         .confirm({
           title: '导出数据',
-          message: '请您在PC浏览器上进行操作\n手机端暂不支持导出'
+          message: device.isDesktop()
+            ? '您确定要导出数据吗？'
+            : '请您在PC浏览器上进行操作\n移动端可能操作失败'
         })
         .then(() => {
           this.$store

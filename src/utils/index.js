@@ -1,5 +1,9 @@
 import dayjs from 'dayjs'
 
+import Device from '@xg4/device'
+
+export const device = new Device()
+
 export { default as Avatar } from './avatar'
 
 export function formatDate(date, formatStr = 'YYYY-MM-DD HH:mm:ss') {
