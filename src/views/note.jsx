@@ -25,7 +25,7 @@ export default {
     handleComplete(ev) {
       ev.preventDefault()
       ev.stopPropagation()
-      this.$store.dispatch('PUT_NOTE', {
+      this.$store.dispatch('note/put', {
         id: this.note.id,
         is_complete: !this.note.is_complete
       })
@@ -33,7 +33,7 @@ export default {
     handleCollect(ev) {
       ev.preventDefault()
       ev.stopPropagation()
-      this.$store.dispatch('PUT_NOTE', {
+      this.$store.dispatch('note/put', {
         id: this.note.id,
         is_collect: !this.note.is_collect
       })

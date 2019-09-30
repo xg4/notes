@@ -91,7 +91,8 @@ export default class Note {
     is_collect = false,
     is_complete = false,
     create_at = Date.now(),
-    update_at = Date.now()
+    update_at = Date.now(),
+    tag = 0
   }) {
     this.id = id
     this.title = title
@@ -100,6 +101,7 @@ export default class Note {
     this.is_complete = is_complete
     this.create_at = create_at
     this.update_at = update_at
+    this.tag = tag
   }
 
   delete() {

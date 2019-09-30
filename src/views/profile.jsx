@@ -11,7 +11,7 @@ export default {
         return
       }
       const data = await upload(file)
-      this.$store.dispatch('UPLOAD_DATA', data)
+      this.$store.dispatch('upload', data)
     },
     handleUpload() {
       this.$dialog
@@ -35,7 +35,7 @@ export default {
         })
         .then(() => {
           this.$store
-            .dispatch('DOWNLOAD_DATA')
+            .dispatch('download')
             .then(() => {})
             .catch(({ message }) => {
               this.$dialog({

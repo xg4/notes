@@ -10,7 +10,7 @@ export default {
     id: String,
     title: String,
     content: String,
-    tag: String,
+    tag: [String, Number],
     is_complete: Boolean,
     is_collect: Boolean,
     create_at: Number,
@@ -20,7 +20,7 @@ export default {
     handleComplete(ev) {
       ev.preventDefault()
       ev.stopPropagation()
-      this.$store.dispatch('PUT_NOTE', {
+      this.$store.dispatch('note/put', {
         id: this.id,
         is_complete: !this.is_complete
       })
@@ -28,7 +28,7 @@ export default {
     handleCollect(ev) {
       ev.preventDefault()
       ev.stopPropagation()
-      this.$store.dispatch('PUT_NOTE', {
+      this.$store.dispatch('note/put', {
         id: this.id,
         is_collect: !this.is_collect
       })

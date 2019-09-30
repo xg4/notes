@@ -14,7 +14,7 @@ export default {
       this.value = value
     },
     handleSubmit() {
-      this.$store.dispatch('UPDATE_USER', { name: this.value })
+      this.$store.dispatch('user/put', { name: this.value })
       this.$notify({
         message: '修改成功',
         duration: 1500,

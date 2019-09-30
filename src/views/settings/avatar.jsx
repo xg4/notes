@@ -53,7 +53,7 @@ export default {
       this.$router.back()
     },
     handleSubmit() {
-      this.$store.dispatch('UPDATE_USER', { avatar: this.url })
+      this.$store.dispatch('user/put', { avatar: this.url })
       this.$notify({
         message: '修改成功',
         duration: 1500,

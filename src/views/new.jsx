@@ -59,10 +59,11 @@ export default {
           tag: this.tag,
           update_at: Date.now()
         }
-        this.$store.dispatch('PUT_NOTE', note)
+        this.$store.dispatch('note/put', note)
         this.$router.back()
       } else {
-        const note = await this.$store.dispatch('POST_NOTE', this)
+        console.log(this)
+        const note = await this.$store.dispatch('note/create', this)
         this.$router.replace(`/note/${note.id}`)
       }
       this.$toast.success('保存成功')

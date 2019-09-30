@@ -1,69 +1,22 @@
-import * as types from './types'
 import { Note, Tag, User } from '../models'
 import { download } from '../utils'
 
 export default {
-  /**
-   * @description Initialize app data
-   */
-  async [types.APP_INIT]({ commit }) {
-    commit(types.PUT_NOTES, Note.find())
-    commit(types.PUT_TAGS, await Tag.init())
-    commit(types.PUT_USER, await User.init())
+  init({ dispatch }) {
+    dispatch('user/init')
+    dispatch('note/init')
+    dispatch('tag/init')
   },
-  [types.UPLOAD_DATA]({ commit }, { notes, user, tags }) {
-    commit(types.PUT_NOTES, Note.merge(notes))
-    commit(types.PUT_USER, User.merge(user))
-    commit(types.PUT_TAGS, Tag.merge(tags))
+  upload({ dispatch }, { notes, user, tags }) {
+    dispatch('user/merge', user)
+    dispatch('note/merge', notes)
+    dispatch('tag/merge', tags)
   },
-  /**
-   * @description update note data by id
-   */
-  async [types.PUT_NOTE]({ commit }, { id, ...partialNote }) {
-    commit(types.PUT_NOTE, await Note.findByIdAndUpdate(id, partialNote))
-  },
-  /**
-   * @description create note
-   */
-  [types.POST_NOTE]({ commit }, partialNote) {
-    return new Promise((resolve, reject) => {
-      Note.create(partialNote)
-        .then(note => {
-          commit(types.POST_NOTE, note)
-          resolve(note)
-        })
-        .catch(reject)
-    })
-  },
-  /**
-   * @description update notes sort type
-   */
-  async [types.PUT_NOTES_SORT]({ commit }, type) {
-    commit(types.PUT_NOTES_SORT, (await User.update({ sort: type })).sort)
-  },
-  async [types.DELETE_NOTE]({ commit }, id) {
-    commit(types.PUT_NOTES, await Note.deleteById(id))
-  },
-  /**
-   * @description delete all notes
-   */
-  [types.DELETE_NOTES]({ commit }) {
-    commit(types.PUT_NOTES, Note.delete())
-  },
-  /**
-   * @description delete completed notes
-   */
-  [types.DELETE_COMPLETED_NOTES]({ commit }) {
-    commit(types.PUT_NOTES, Note.delete({ is_complete: true }))
-  },
-  [types.DOWNLOAD_DATA]() {
+  download() {
     return download({
       notes: Note.find(),
       user: User.get(),
       tags: Tag.find()
     })
-  },
-  async [types.UPDATE_USER]({ commit }, user) {
-    commit(types.UPDATE_USER, await User.update(user))
   }
 }

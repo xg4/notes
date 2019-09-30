@@ -2,22 +2,18 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 import getters from './getters'
 import actions from './actions'
-import mutations from './mutations'
+import user from './modules/user'
+import note from './modules/note'
+import tag from './modules/tag'
 
 Vue.use(Vuex)
 
-const state = {
-  notes: [],
-  tags: [],
-  user: {
-    // 0(default): sort by note.update_at
-    sort: 0
-  }
-}
-
 export default new Vuex.Store({
-  state,
   getters,
-  mutations,
-  actions
+  actions,
+  modules: {
+    user,
+    note,
+    tag
+  }
 })

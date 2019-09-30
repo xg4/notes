@@ -3,7 +3,7 @@ import styles from './App.module.less'
 
 export default {
   created() {
-    this.$store.dispatch('APP_INIT')
+    this.$store.dispatch('init')
   },
   data() {
     return {
@@ -59,10 +59,9 @@ export default {
           this.$router.push('/new')
           break
         case 'sort':
-          this.$store.dispatch(
-            'PUT_NOTES_SORT',
-            [1, 0][this.$store.state.user.sort] || 0
-          )
+          this.$store.dispatch('user/put', {
+            sort: [1, 0][this.$store.state.user.sort] || 0
+          })
           break
         case 'deleteCompleted':
           if (!this.$store.getters.completedNotes.length) {
@@ -70,7 +69,9 @@ export default {
           } else {
             this.confirm('您确定要删除已完成的备忘录吗？\n此操作不可恢复')
               .then(() => {
-                this.$store.dispatch('DELETE_COMPLETED_NOTES')
+                this.$store.dispatch('note/deleteByQuery', {
+                  is_complete: true
+                })
               })
               .catch(() => {})
           }
@@ -81,7 +82,7 @@ export default {
           } else {
             this.confirm('您确定要删除全部备忘录吗？\n此操作不可恢复')
               .then(() => {
-                this.$store.dispatch('DELETE_NOTES')
+                this.$store.dispatch('note/delete')
               })
               .catch(() => {})
           }
@@ -92,7 +93,7 @@ export default {
         case 'delete':
           this.confirm('您确定要删除此备忘录吗？\n此操作不可恢复')
             .then(() => {
-              this.$store.dispatch('DELETE_NOTE', this.$route.params.id)
+              this.$store.dispatch('note/delete', this.$route.params.id)
               this.$router.replace('/')
             })
             .catch(() => {})

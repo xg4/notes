@@ -6,11 +6,11 @@ const SORT_MAP = {
 export default {
   notes(state) {
     const sortFunc = SORT_MAP[state.user.sort]
-    return sortFunc ? state.notes.sort(sortFunc) : state.notes
+    return sortFunc ? state.note.list.sort(sortFunc) : state.note.list
   },
   getNoteById(state) {
     return id => {
-      return state.notes.find(note => note.id === id)
+      return state.note.list.find(note => note.id === id)
     }
   },
   collectedNotes(state, getters) {
@@ -20,9 +20,9 @@ export default {
     return getters.notes.filter(note => note.is_complete)
   },
   tags(state) {
-    return state.tags
+    return state.tag.list
   },
   getTagById(state) {
-    return id => state.tags.find(tag => tag.id === id)
+    return id => state.tag.list.find(tag => tag.id === id)
   }
 }
